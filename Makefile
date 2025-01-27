@@ -64,7 +64,7 @@ $(OBJ_DIR)/push_swap/%.o: $(SRC_DIR)%.c
 	@$(CC) $(CFLAGS) -c -o $@ $<
 	@echo "Compiled $<"
 
-shared: $(OBJ)
+shared: $(_LIB_FT) $(OBJ)
 	ar rcs $(OBJ_DIR)$(NAME).a $(OBJ)
 
 test: shared

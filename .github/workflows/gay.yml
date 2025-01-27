@@ -29,12 +29,8 @@ jobs:
 
       - name: Build and test
         run: |
-          mkdir -p target
+          make shared
           make test
-        env:
-          CC: clang
-          LD: mold
-          BUILD_DIR: ./target
 
       - name: Package artifacts
         run: |
