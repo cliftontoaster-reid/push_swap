@@ -14,10 +14,20 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
       - name: Install dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y clang mold libcunit1-dev
+          python3 -m pip install --upgrade pip setuptools
+          python3 -m pip install norminette
+
+      - name: Run norminette
+        run: |
+          norminette --use-gitignore
 
       - name: Build and test
         run: |
