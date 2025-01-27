@@ -1,0 +1,48 @@
+name: Pretty gay tests
+
+on:
+  push:
+    branches: ["main", "dev"]
+  pull_request:
+    branches: ["main", "dev"]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Cache build directory
+        uses: actions/cache@v3
+        with:
+          path: ./target
+          key: ${{ runner.os }}-build-${{ hashFiles('Makefile', '**/*.c', '**/*.h') }}
+          restore-keys: |
+            ${{ runner.os }}-build-
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y clang mold libcunit1-dev
+
+      - name: Build and test
+        run: |
+          mkdir -p target
+          make test
+        env:
+          CC: clang
+          LD: mold
+          BUILD_DIR: ./target
+
+      - name: Package artifacts
+        run: |
+          XZ_OPT=-9 tar -Jcvf build-artifacts.tar.xz target
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-artifacts
+          path: build-artifacts.tar.xz
+          retention-days: 1
