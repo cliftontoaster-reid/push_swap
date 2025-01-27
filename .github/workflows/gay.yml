@@ -14,14 +14,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Cache build directory
-        uses: actions/cache@v3
-        with:
-          path: ./target
-          key: ${{ runner.os }}-build-${{ hashFiles('Makefile', '**/*.c', '**/*.h') }}
-          restore-keys: |
-            ${{ runner.os }}-build-
-
       - name: Install dependencies
         run: |
           sudo apt-get update
