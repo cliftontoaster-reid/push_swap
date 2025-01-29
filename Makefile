@@ -27,9 +27,11 @@ NAME = push_swap
 
 SRC = \
 	$(SRC_DIR)data.c \
+	$(SRC_DIR)utils.c \
 	 \
 	$(SRC_DIR)nbr/list_search.c \
 	$(SRC_DIR)nbr/math_list.c \
+	$(SRC_DIR)nbr/math_list_2.c \
 	 \
 	$(SRC_DIR)ope/enum.c \
 	$(SRC_DIR)ope/push.c \
@@ -38,6 +40,11 @@ SRC = \
 	$(SRC_DIR)ope/swap.c \
 	 \
 	$(SRC_DIR)str/find_lst.c \
+	 \
+	$(SRC_DIR)sort/brot_push.c \
+	$(SRC_DIR)sort/sort.c \
+	 \
+	$(SRC_DIR)infinite_pretzel/pretzel.c \
 
 OBJ = $(patsubst $(SRC_DIR)%.c, $(OBJ_DIR)/push_swap/%.o, $(SRC))
 

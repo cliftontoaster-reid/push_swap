@@ -30,6 +30,8 @@ SRC	=	\
 	$(SRC_DIR)swapush.cpp \
 		\
 	$(SRC_DIR)test_findlst.cpp \
+	$(SRC_DIR)test_utils.cpp \
+	$(SRC_DIR)test_sort.cpp \
 	$(SRC_DIR)ope.cpp \
 	$(SRC_DIR)data.cpp \
 

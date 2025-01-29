@@ -6,7 +6,7 @@
 /*   By: lfiorell <lfiorell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 10:46:22 by lfiorell          #+#    #+#             */
-/*   Updated: 2025/01/25 11:30:25 by lfiorell         ###   ########.fr       */
+/*   Updated: 2025/01/27 14:07:41 by lfiorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 
 int	ilst_max(t_list *lst);
 int	ilst_min(t_list *lst);
+int	ilst_idxmax(t_list *lst);
+int	ilst_idxmin(t_list *lst);
 int	ilst_sorted(t_list *lst);
 int	ilst_sorted_desc(t_list *lst);
 

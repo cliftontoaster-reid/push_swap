@@ -6,7 +6,7 @@
 /*   By: lfiorell <lfiorell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 16:43:07 by lfiorell          #+#    #+#             */
-/*   Updated: 2025/01/25 11:41:40 by lfiorell         ###   ########.fr       */
+/*   Updated: 2025/01/28 16:57:54 by lfiorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,6 @@ typedef struct s_human
 	t_list	*b;
 	/// @brief The operations performed on the stacks.
 	t_list	*op;
-	/// @brief The minimum value of the stack.
-	int		min;
-	/// @brief The maximum value of the stack.
-	int		max;
 }			t_human;
 
 int			ft_kill_all_humans(t_human *data);

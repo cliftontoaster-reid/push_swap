@@ -18,14 +18,15 @@ runtimes:
 lint:
   enabled:
     - actionlint@1.7.7
-    - checkov@3.2.357
+    - checkov@3.2.358
     - git-diff-check
     - prettier@3.4.2
     - trufflehog@3.88.2
     - yamllint@1.35.1
 actions:
-  enabled:
+  disabled:
     - trunk-announce
     - trunk-check-pre-push
     - trunk-fmt-pre-commit
+  enabled:
     - trunk-upgrade-available

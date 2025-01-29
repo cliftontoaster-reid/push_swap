@@ -6,7 +6,7 @@
 /*   By: lfiorell <lfiorell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 15:00:15 by lfiorell          #+#    #+#             */
-/*   Updated: 2025/01/22 17:31:03 by lfiorell         ###   ########.fr       */
+/*   Updated: 2025/01/28 17:22:55 by lfiorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,12 @@ int main()
   CU_add_test(suite, "Parse List Args", test_parse_list_args);
   CU_add_test(suite, "Parse List Envp", test_parse_list_envp);
   CU_add_test(suite, "Init Data Envp", test_init_data_envp);
+  //
+  CU_add_test(suite, "Push Op", test_push_op);
+  CU_add_test(suite, "Exec Op", test_exec_op);
+  CU_add_test(suite, "Clone List", test_clone_list);
+  //
+  CU_add_test(suite, "Pretzel", test_pretzel);
   //
   CU_basic_run_tests();
   CU_cleanup_registry();
