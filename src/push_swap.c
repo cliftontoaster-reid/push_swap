@@ -6,7 +6,7 @@
 /*   By: lfiorell <lfiorell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 10:55:10 by lfiorell          #+#    #+#             */
-/*   Updated: 2025/01/29 20:28:08 by lfiorell         ###   ########.fr       */
+/*   Updated: 2025/01/29 20:40:52 by lfiorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ static void	print_op(t_human *data)
 		ft_putchar_fd('\n', 1);
 		tmp = data->op;
 		data->op = data->op->next;
-		free(tmp->content); // Free the content of the node
-		free(tmp);          // Free the node itself
+		free(tmp->content);
+		free(tmp);
 	}
 }
 
