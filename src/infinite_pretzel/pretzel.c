@@ -6,7 +6,7 @@
 /*   By: lfiorell <lfiorell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:36:50 by lfiorell          #+#    #+#             */
-/*   Updated: 2025/01/29 16:35:29 by lfiorell         ###   ########.fr       */
+/*   Updated: 2025/01/29 20:34:28 by lfiorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,5 @@ int	pretzel(t_human *data)
 	{
 		push_op(data, PA);
 	}
-	move(data, 0, ilst_min(data->a), 0);
 	return (0);
 }
