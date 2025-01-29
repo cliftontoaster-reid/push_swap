@@ -6,11 +6,21 @@
 /*   By: lfiorell <lfiorell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 17:05:27 by lfiorell          #+#    #+#             */
-/*   Updated: 2025/01/29 17:30:43 by lfiorell         ###   ########.fr       */
+/*   Updated: 2025/01/29 20:16:14 by lfiorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "CUnit/Basic.h"
+
+#define BLK "\033[0;30m"
+#define RED "\033[0;31m"
+#define GRN "\033[0;32m"
+#define YEL "\033[0;33m"
+#define BLU "\033[0;34m"
+#define MAG "\033[0;35m"
+#define CYN "\033[0;36m"
+#define WHT "\033[0;37m"
+#define COLOR_RESET "\033[0m"
 
 extern "C"
 {
@@ -48,11 +58,12 @@ void test_pretzel(void)
   {
     int rounds = 100;
 
+    ft_printf("%sWorker started%s\n", CYN, COLOR_RESET);
     for (int round = 0; round < rounds; round++)
     {
-      ft_printf("Test iteration %d is running\n", round);
       t_human *human = (t_human *)calloc(1, sizeof(t_human));
       int amount = (rand() % 201) + 10;
+      ft_printf("%sStarting testing at idx: %d size: %d%s\n", RED, round, amount, COLOR_RESET);
 
       for (int j = 0; j < amount; j++)
       {
@@ -78,7 +89,9 @@ void test_pretzel(void)
 
       ft_lstclear(&aaa, fuck_no);
       ft_kill_all_humans(human);
+      ft_printf("%sTest idx %d ended\n%s", GRN, round, COLOR_RESET);
     }
+    ft_printf("%sWorker finished%s\n", BLU, COLOR_RESET);
   };
   std::vector<std::thread> pool;
   pool.reserve(thread_count);
