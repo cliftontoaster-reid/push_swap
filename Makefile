@@ -17,10 +17,13 @@ MOLD_LINKER := $(shell command -v mold 2> /dev/null)
 LLD_LINKER := $(shell command -v ld.lld 2> /dev/null)
 
 # Use mold as linker if available, otherwise use lld, otherwise use default
+INC_LBFT = $(_LIB_FT)
 ifneq ($(MOLD_LINKER),)
 	LDFLAGS += -fuse-ld=mold
 else ifneq ($(LLD_LINKER),)
 	LDFLAGS += -fuse-ld=lld
+else
+	INC_LBFT = -Wl,--whole-archive $(_LIB_FT) -Wl,--no-whole-archive
 endif
 
 NAME = push_swap
@@ -52,7 +55,7 @@ all: $(NAME)
 
 $(NAME): $(_LIB_FT) $(OBJ) $(OBJ_DIR)/push_swap/$(NAME).o
 	@$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $(OBJ) $(SRC_DIR)$(NAME).c \
-        -Wl,--whole-archive $(_LIB_FT) -Wl,--no-whole-archive
+        $(INC_LBFT)
 ifneq ($(MOLD_LINKER),)
 	@echo "Linking $@ using the mold linker"
 else ifneq ($(LLD_LINKER),)
