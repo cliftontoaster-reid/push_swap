@@ -17,11 +17,10 @@ MOLD_LINKER := $(shell command -v mold 2> /dev/null)
 LLD_LINKER := $(shell command -v ld.lld 2> /dev/null)
 
 # Use mold as linker if available, otherwise use lld, otherwise use default
-INC_LBFT = $(_LIB_FT)
 ifneq ($(MOLD_LINKER),)
-	LDFLAGS += -fuse-ld=mold
+	LDFLAGS += -fuse-ld=mold -L$(LFT_DIR) -lft
 else ifneq ($(LLD_LINKER),)
-	LDFLAGS += -fuse-ld=lld
+	LDFLAGS += -fuse-ld=lld -L$(LFT_DIR) -lft
 else
 	INC_LBFT = -Wl,--whole-archive $(_LIB_FT) -Wl,--no-whole-archive
 endif
