@@ -5,31 +5,36 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfiorell <lfiorell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/21 16:43:07 by lfiorell          #+#    #+#             */
-/*   Updated: 2025/01/28 16:57:54 by lfiorell         ###   ########.fr       */
+/*   Created: 2025/02/03 11:24:23 by lfiorell          #+#    #+#             */
+/*   Updated: 2025/02/03 12:46:40 by lfiorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DATA_H
 # define DATA_H
 
+# define ERR_MALLOC -1
+# define ERR_ARG_TYPE -2
+# define ERR_DUPL -3
+# define KILL free
+
 # include "libft.h"
 
-/// @brief A structure to hold the data of the stacks.
-typedef struct s_human
+typedef struct s_data
 {
-	/// @brief The stack A.
 	t_list	*a;
-	/// @brief The stack B.
 	t_list	*b;
-	/// @brief The operations performed on the stacks.
-	t_list	*op;
-}			t_human;
+	t_list	*ops;
+	t_list	*index;
+}			t_data;
 
-int			ft_kill_all_humans(t_human *data);
-t_human		*ft_init_data(int argc, char const *argv[], char *const envp[]);
-
-int			parse_list_args(int argc, char const *argv[], t_list **list);
-int			parse_list_envp(char *const envp[], t_list **list);
+t_data		*init_thatguy(void);
+void		kill_thatguy(t_data *data);
+int			parse_list(int argc, char *argv[], char *const envp[],
+				t_data *data);
+int			envp_contains(char *const envp[], char *key);
+char		*envp_get(char *const envp[], char *key);
+int			ft_split_count(char **split);
+int			ft_split_free(char **split);
 
 #endif

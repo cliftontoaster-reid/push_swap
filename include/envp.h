@@ -1,33 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pretzel.c                                          :+:      :+:    :+:   */
+/*   envp.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfiorell <lfiorell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/27 11:36:50 by lfiorell          #+#    #+#             */
-/*   Updated: 2025/01/29 20:34:28 by lfiorell         ###   ########.fr       */
+/*   Created: 2025/02/03 15:55:51 by lfiorell          #+#    #+#             */
+/*   Updated: 2025/02/03 15:56:19 by lfiorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pretzel.h"
-#include "sort.h"
-#include "utils.h"
-
-int	pretzel(t_human *data)
-{
-	push_op(data, PB);
-	push_op(data, PB);
-	if (*ilst_get(data->b, 0) < *ilst_get(data->b, 1))
-		push_op(data, SB);
-	while (data->a)
-	{
-		brot_push(data);
-		move(data, 1, ilst_max(data->b), 0);
-	}
-	while (data->b)
-	{
-		push_op(data, PA);
-	}
-	return (0);
-}
+int envp_contains(char *const envp[], char *key);
+char *envp_get(char *const envp[], char *key);

@@ -1,34 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   find_lst.c                                         :+:      :+:    :+:   */
+/*   envp.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfiorell <lfiorell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/21 18:51:19 by lfiorell          #+#    #+#             */
-/*   Updated: 2025/01/21 19:00:06 by lfiorell         ###   ########.fr       */
+/*   Created: 2025/02/03 12:21:12 by lfiorell          #+#    #+#             */
+/*   Updated: 2025/02/03 12:21:42 by lfiorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "str.h"
+#include "data.h"
 
-/// @brief Find the first string in the list that starts with the string \p str.
-/// @param list The list of strings.
-/// @param str The string to search for.
-/// @return The first string that starts with \p str or `NULL` if no string
-char	*lst_startswith(char *const list[], const char *str)
+int	envp_contains(char *const envp[], char *key)
 {
 	int	i;
-	int	j;
 
 	i = 0;
-	while (list[i])
+	while (envp[i])
 	{
-		j = 0;
-		while (list[i][j] == str[j] && list[i][j] && str[j])
-			j++;
-		if (!str[j])
-			return (list[i]);
+		if (ft_strncmp(envp[i], key, ft_strlen(key)) == 0)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+char	*envp_get(char *const envp[], char *key)
+{
+	int	i;
+
+	i = 0;
+	while (envp[i])
+	{
+		if (ft_strncmp(envp[i], key, ft_strlen(key)) == 0)
+			return (envp[i] + ft_strlen(key) + 1);
 		i++;
 	}
 	return (NULL);

@@ -1,51 +1,58 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotate.c                                           :+:      :+:    :+:   */
+/*   arc_rotate.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfiorell <lfiorell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/22 13:01:55 by lfiorell          #+#    #+#             */
-/*   Updated: 2025/01/22 13:11:20 by lfiorell         ###   ########.fr       */
+/*   Created: 2025/02/03 13:07:49 by lfiorell          #+#    #+#             */
+/*   Updated: 2025/02/03 13:32:14 by lfiorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "operations.h"
+#include "cmd.h"
 
-void	ra(t_list **a)
+// Shift down all elements of stack a by 1.
+// The last element becomes the first one.
+void	rra(t_list **a, t_list **b)
 {
-	t_list	*first;
+	t_list	*tmp;
 	t_list	*last;
 
+	(void)b;
 	if (!a || !*a || !(*a)->next)
 		return ;
-	first = *a;
 	last = *a;
-	while (last->next)
+	while (last->next->next)
 		last = last->next;
-	*a = first->next;
-	last->next = first;
-	first->next = NULL;
+	tmp = last->next;
+	last->next = NULL;
+	tmp->next = *a;
+	*a = tmp;
 }
 
-void	rb(t_list **b)
+// Shift down all elements of stack b by 1.
+// The last element becomes the first one.
+void	rrb(t_list **a, t_list **b)
 {
-	t_list	*first;
+	t_list	*tmp;
 	t_list	*last;
 
+	(void)a;
 	if (!b || !*b || !(*b)->next)
 		return ;
-	first = *b;
 	last = *b;
-	while (last->next)
+	while (last->next->next)
 		last = last->next;
-	*b = first->next;
-	last->next = first;
-	first->next = NULL;
+	tmp = last->next;
+	last->next = NULL;
+	tmp->next = *b;
+	*b = tmp;
 }
 
-void	rr(t_list **a, t_list **b)
+// rra and rrb at the same time.
+void	rrr(t_list **a, t_list **b)
 {
-	ra(a);
-	rb(b);
+	rra(a, b);
+	rrb(a, b);
 }
