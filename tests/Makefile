@@ -17,7 +17,9 @@ CUNIT_LIB = $(CUNIT_INSTALL_DIR)/lib/libcunit.a
 
 CFLAGS = -Wall -Wextra -Werror -Wpedantic -std=c++17 -g -fsanitize=undefined -fsanitize=address \
 		 -I$(CUNIT_INSTALL_DIR)/include -I$(LFT_DIR) -I$(INC_DIR)
-LDFLAGS = -g -fsanitize=undefined -fsanitize=address -L$(CUNIT_INSTALL_DIR)/lib -lcunit
+LDFLAGS = -g -fsanitize=undefined -fsanitize=address \
+    -L$(CUNIT_INSTALL_DIR)/lib -lcunit \
+    -Wl,-rpath,$(CUNIT_INSTALL_DIR)/lib
 
 # Check if mold linker exists
 MOLD_LINKER := $(shell command -v mold 2> /dev/null)
@@ -95,4 +97,4 @@ fclean: nclean
 re: fclean all
 qre: nclean all
 
-.PHONY: all clean nclean fclean re qre 
+.PHONY: all clean nclean fclean re qre
