@@ -37,6 +37,8 @@ SRC = \
 	$(SRC_DIR)cmd/push.c \
 	$(SRC_DIR)cmd/rotate.c \
 	$(SRC_DIR)cmd/swap.c \
+	  \
+	$(SRC_DIR)job/quicksort.c \
 
 OBJ = $(patsubst $(SRC_DIR)%.c, $(OBJ_DIR)/push_swap/%.o, $(SRC))
 

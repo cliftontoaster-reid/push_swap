@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   envp.cpp                                           :+:      :+:    :+:   */
+/*   quicksort.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfiorell <lfiorell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/03 15:54:38 by lfiorell          #+#    #+#             */
-/*   Updated: 2025/02/03 17:12:14 by lfiorell         ###   ########.fr       */
+/*   Created: 2025/02/03 17:09:53 by lfiorell          #+#    #+#             */
+/*   Updated: 2025/02/03 17:17:20 by lfiorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,18 @@
 
 extern "C"
 {
-#include "data.h"
+#include "job.h"
 }
 
-void test_envp_contains()
+void test_quicksort(void)
 {
-  char *envp[] = {(char *)"KEY=VALUE", nullptr};
-  CU_ASSERT_EQUAL(envp_contains(envp, (char *)"KEY"), 1);
-  CU_ASSERT_EQUAL(envp_contains(envp, (char *)"VALUE"), 0);
-}
-
-void test_envp_get()
-{
-  char *envp[] = {(char *)"KEY=VALUE", nullptr};
-  CU_ASSERT_STRING_EQUAL(envp_get(envp, (char *)"KEY"), "VALUE");
-  CU_ASSERT_EQUAL(envp_get(envp, (char *)"VALUE"), nullptr);
+  int arr[] = {10, 7, 8, 9, 1, 5};
+  int n = sizeof(arr) / sizeof(arr[0]);
+  quicksort(arr, 0, n - 1);
+  CU_ASSERT_EQUAL(arr[0], 1);
+  CU_ASSERT_EQUAL(arr[1], 5);
+  CU_ASSERT_EQUAL(arr[2], 7);
+  CU_ASSERT_EQUAL(arr[3], 8);
+  CU_ASSERT_EQUAL(arr[4], 9);
+  CU_ASSERT_EQUAL(arr[5], 10);
 }

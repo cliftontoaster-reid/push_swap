@@ -6,7 +6,7 @@
 /*   By: lfiorell <lfiorell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 15:05:46 by lfiorell          #+#    #+#             */
-/*   Updated: 2025/02/03 16:19:55 by lfiorell         ###   ########.fr       */
+/*   Updated: 2025/02/03 17:17:44 by lfiorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,3 +35,6 @@ void test_sb();
 // data/envp.cpp
 void test_envp_contains();
 void test_envp_get();
+
+// job/quicksort.cpp
+void test_quicksort(void);

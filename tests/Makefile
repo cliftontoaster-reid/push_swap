@@ -37,11 +37,14 @@ SRC	=	\
 	$(SRC_DIR)swapush.cpp \
 		\
 	$(SRC_DIR)data/stack.cpp \
+	$(SRC_DIR)data/envp.cpp \
 	  \
 	$(SRC_DIR)cmd/arc_rotate.cpp \
 	$(SRC_DIR)cmd/push.cpp \
 	$(SRC_DIR)cmd/rotate.cpp \
 	$(SRC_DIR)cmd/swap.cpp \
+		\
+	$(SRC_DIR)job/quicksort.cpp \
 
 OBJ = $(patsubst $(SRC_DIR)%.cpp, $(OBJ_DIR)/%.o, $(SRC))
 EXT_OBJ ?= 

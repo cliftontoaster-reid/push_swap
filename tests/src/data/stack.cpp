@@ -6,7 +6,7 @@
 /*   By: lfiorell <lfiorell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:38:28 by lfiorell          #+#    #+#             */
-/*   Updated: 2025/02/03 12:46:59 by lfiorell         ###   ########.fr       */
+/*   Updated: 2025/02/03 17:12:14 by lfiorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ extern "C"
 }
 
 #include <CUnit/CUnit.h>
-#include <CUnit/Basic.h>
+#include "CUnit/Basic.h"
 
 void test_parse_null_stack()
 {

@@ -6,12 +6,12 @@
 /*   By: lfiorell <lfiorell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 15:00:15 by lfiorell          #+#    #+#             */
-/*   Updated: 2025/02/03 14:18:56 by lfiorell         ###   ########.fr       */
+/*   Updated: 2025/02/03 17:19:01 by lfiorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <CUnit/CUnit.h>
-#include <CUnit/Basic.h>
+#include "CUnit/Basic.h"
 #include "../tests.hpp"
 
 int main()
@@ -40,6 +40,14 @@ int main()
   // swap.cpp
   CU_add_test(suite, "sa_with_comunism", test_sa);
   CU_add_test(suite, "sb_with_comunism", test_sb);
+  //
+  // envp.cpp
+  CU_add_test(suite, "envp_contains", test_envp_contains);
+  CU_add_test(suite, "envp_get", test_envp_get);
+  //
+  // quicksort.cpp
+  CU_add_test(suite, "quicksort", test_quicksort);
+  //
   CU_basic_run_tests();
   CU_cleanup_registry();
   return 0;
