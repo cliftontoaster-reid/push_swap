@@ -6,13 +6,13 @@
 /*   By: lfiorell <lfiorell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:04:41 by lfiorell          #+#    #+#             */
-/*   Updated: 2025/02/03 17:10:18 by lfiorell         ###   ########.fr       */
+/*   Updated: 2025/02/03 17:31:25 by lfiorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef JOB_H
-#define JOB_H
+# define JOB_H
 
-void quicksort(int *arr, int low, int high);
+void	quicksort(int *arr, int low, int high);
 
 #endif

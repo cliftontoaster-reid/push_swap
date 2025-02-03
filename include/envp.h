@@ -6,9 +6,9 @@
 /*   By: lfiorell <lfiorell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:55:51 by lfiorell          #+#    #+#             */
-/*   Updated: 2025/02/03 15:56:19 by lfiorell         ###   ########.fr       */
+/*   Updated: 2025/02/03 17:31:32 by lfiorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int envp_contains(char *const envp[], char *key);
-char *envp_get(char *const envp[], char *key);
+int		envp_contains(char *const envp[], char *key);
+char	*envp_get(char *const envp[], char *key);

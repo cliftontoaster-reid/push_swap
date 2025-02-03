@@ -6,34 +6,45 @@
 /*   By: lfiorell <lfiorell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 11:49:53 by lfiorell          #+#    #+#             */
-/*   Updated: 2025/02/03 12:46:43 by lfiorell         ###   ########.fr       */
+/*   Updated: 2025/02/03 17:33:43 by lfiorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "data.h"
 
+static int	validate_argument(char *str)
+{
+	int	j;
+
+	j = 0;
+	while (str[j])
+	{
+		if (!ft_isdigit(str[j]))
+			return (0);
+		j++;
+	}
+	return (1);
+}
+
 int	parse(int argc, char *argv[], int *stack)
 {
 	int	i;
-	int	j;
+	int	k;
 
 	i = 0;
 	if (!stack)
 		return (ERR_MALLOC);
 	while (i < argc)
 	{
-		j = 0;
-		while (argv[i][j])
-		{
-			if (!ft_isdigit(argv[i][j]))
-				return (ERR_ARG_TYPE);
-			j++;
-		}
+		if (!validate_argument(argv[i]))
+			return (ERR_ARG_TYPE);
 		stack[i] = ft_atoi(argv[i]);
-		for (int k = 0; k < i; k++)
+		k = 0;
+		while (k < i)
 		{
 			if (stack[k] == stack[i])
 				return (ERR_DUPL);
+			k++;
 		}
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: lfiorell <lfiorell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 11:38:28 by lfiorell          #+#    #+#             */
-/*   Updated: 2025/02/03 12:29:33 by lfiorell         ###   ########.fr       */
+/*   Updated: 2025/02/03 17:30:03 by lfiorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	zeroize(void *ptr)
 	ft_bzero(ptr, sizeof(int));
 	free(ptr);
 }
+
 void	kill_thatguy(t_data *data)
 {
 	if (data->a)
