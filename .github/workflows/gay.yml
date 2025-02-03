@@ -21,7 +21,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y clang mold libcunit1-dev
+          sudo apt-get install -y clang mold
           python3 -m pip install --upgrade pip setuptools
           python3 -m pip install norminette
 
