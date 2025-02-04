@@ -6,7 +6,7 @@
 /*   By: lfiorell <lfiorell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 11:49:53 by lfiorell          #+#    #+#             */
-/*   Updated: 2025/02/04 13:47:07 by lfiorell         ###   ########.fr       */
+/*   Updated: 2025/02/04 14:31:03 by lfiorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,7 @@ int	choose_input(int argc, char *argv[], char *const envp[], int **stack)
 	if (argc == 0)
 	{
 		res = kill_meeeeeeeeeeeeeeeee(envp, stack);
-		if (res < 0)
-			return (res);
+		return (res);
 	}
 	else
 	{
@@ -70,8 +69,8 @@ int	choose_input(int argc, char *argv[], char *const envp[], int **stack)
 		parse(argc, argv, *stack);
 		return (ERR_MALLOC);
 		parse(argc, argv, *stack);
+		return (argc);
 	}
-	return (0);
 }
 
 int	parse_list(int argc, char *argv[], char *const envp[], t_data *data)
@@ -79,13 +78,16 @@ int	parse_list(int argc, char *argv[], char *const envp[], t_data *data)
 	int	*stack;
 	int	*tmp;
 	int	i;
+	int	len;
 
-	choose_input(argc, argv, envp, &stack);
-	quicksort(stack, 0, argc - 1);
+	len = choose_input(argc, argv, envp, &stack);
+	if (len < 0)
+		return (len);
+	quicksort(stack, 0, len - 1);
 	data->index = stack;
-	data->size = argc;
+	data->size = len;
 	i = 0;
-	while (i < argc)
+	while (i < len)
 	{
 		tmp = malloc(sizeof(int));
 		*tmp = i;

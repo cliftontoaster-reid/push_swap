@@ -6,7 +6,7 @@
 /*   By: lfiorell <lfiorell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:21:12 by lfiorell          #+#    #+#             */
-/*   Updated: 2025/02/04 13:38:14 by lfiorell         ###   ########.fr       */
+/*   Updated: 2025/02/04 14:40:07 by lfiorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ char	*envp_get(char *const envp[], char *key)
 	return (NULL);
 }
 
+int		parse(int argc, char *argv[], int *stack);
+
 int	kill_meeeeeeeeeeeeeeeee(char *const envp[], int **stack)
 {
 	int		i;
@@ -47,7 +49,7 @@ int	kill_meeeeeeeeeeeeeeeee(char *const envp[], int **stack)
 	char	**split;
 	int		argc;
 
-	if (envp_contains(envp, "ARG"))
+	if (envp_contains(envp, "ARG") == 1)
 	{
 		arg = envp_get(envp, "ARG");
 		split = ft_split(arg, ' ');
@@ -59,6 +61,7 @@ int	kill_meeeeeeeeeeeeeeeee(char *const envp[], int **stack)
 		ft_split_free(split);
 		if (i < 0)
 			return (i);
+		return (argc);
 	}
-	return (0);
+	return (ERR_ARG);
 }

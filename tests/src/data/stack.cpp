@@ -6,7 +6,7 @@
 /*   By: lfiorell <lfiorell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:38:28 by lfiorell          #+#    #+#             */
-/*   Updated: 2025/02/04 13:06:55 by lfiorell         ###   ########.fr       */
+/*   Updated: 2025/02/04 14:41:55 by lfiorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,19 @@ void test_parse_envp()
   CU_ASSERT_EQUAL(stack[2], 3);
 
   free(stack);
+}
+
+void test_parse_list_args()
+{
+  char *argv[] = {(char *)"1", (char *)"2", (char *)"3", nullptr};
+  int argc = 3;
+
+  t_data *data;
+
+  data = (t_data *)malloc(sizeof(t_data));
+  ft_bzero(data, sizeof(t_data));
+
+  parse_list(argc, argv, nullptr, data);
+
+  CU_ASSERT_EQUAL(data->size, 3);
 }
