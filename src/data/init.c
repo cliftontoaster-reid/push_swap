@@ -6,7 +6,7 @@
 /*   By: lfiorell <lfiorell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 11:38:28 by lfiorell          #+#    #+#             */
-/*   Updated: 2025/02/03 17:30:03 by lfiorell         ###   ########.fr       */
+/*   Updated: 2025/02/04 12:38:03 by lfiorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	kill_thatguy(t_data *data)
 	if (data->ops)
 		ft_lstclear(&data->ops, zeroize);
 	if (data->index)
-		ft_lstclear(&data->index, zeroize);
+		free(data->index);
 	ft_bzero(data, sizeof(t_data));
 	KILL(data);
 }

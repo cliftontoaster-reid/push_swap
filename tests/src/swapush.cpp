@@ -6,7 +6,7 @@
 /*   By: lfiorell <lfiorell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 15:00:15 by lfiorell          #+#    #+#             */
-/*   Updated: 2025/02/03 17:19:01 by lfiorell         ###   ########.fr       */
+/*   Updated: 2025/02/04 13:07:04 by lfiorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int main()
   CU_add_test(suite, "parse_invalid_glitter_arg", test_parse_invalid_arg);
   CU_add_test(suite, "parse_valid_proud_args", test_parse_valid_args);
   CU_add_test(suite, "parse_dupl_pride_args", test_parse_dupl_args);
+  CU_add_test(suite, "parse_envp", test_parse_envp);
+  //
   // arc_rotate.cpp
   CU_add_test(suite, "rra_in_pride", test_rra);
   CU_add_test(suite, "rrb_in_pride", test_rrb);

@@ -6,7 +6,7 @@
 /*   By: lfiorell <lfiorell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 15:05:46 by lfiorell          #+#    #+#             */
-/*   Updated: 2025/02/03 17:17:44 by lfiorell         ###   ########.fr       */
+/*   Updated: 2025/02/04 13:07:08 by lfiorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@ void test_parse_invalid_arg();
 void test_parse_valid_args();
 void test_parse_null_stack();
 void test_parse_dupl_args();
+void test_parse_envp();
 
 // cmd/arc_rotate.cpp
 void test_rra(void);

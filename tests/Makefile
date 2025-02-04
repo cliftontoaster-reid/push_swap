@@ -72,15 +72,15 @@ $(_LIB_FT):
 $(CUNIT_LIB):
 	@mkdir -p $(OBJ_DIR)
 	@echo "Downloading CUnit..."
-	@cd $(OBJ_DIR) && wget https://downloads.sourceforge.net/project/cunit/CUnit/$(CUNIT_VER)/$(CUNIT_TAR)
+	@cd $(OBJ_DIR) && wget https://downloads.sourceforge.net/project/cunit/CUnit/$(CUNIT_VER)/$(CUNIT_TAR) > /dev/null
 	@echo "Extracting CUnit..."
 	@cd $(OBJ_DIR) && tar -xjf $(CUNIT_TAR)
 	@echo "Configuring CUnit..."
-	@cd $(CUNIT_DIR) && autoreconf -fi && ./configure --prefix=$(abspath $(CUNIT_INSTALL_DIR))
+	@cd $(CUNIT_DIR) && autoreconf -fi > /dev/null && ./configure --prefix=$(abspath $(CUNIT_INSTALL_DIR)) > /dev/null
 	@echo "Building CUnit..."
-	@$(MAKE) -C $(CUNIT_DIR)
+	@$(MAKE) -C $(CUNIT_DIR) > /dev/null
 	@echo "Installing CUnit..."
-	@$(MAKE) -C $(CUNIT_DIR) install
+	@$(MAKE) -C $(CUNIT_DIR) install > /dev/null
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.cpp
 	@mkdir -p $(dir $@)

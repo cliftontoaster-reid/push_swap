@@ -6,11 +6,12 @@
 /*   By: lfiorell <lfiorell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 11:49:53 by lfiorell          #+#    #+#             */
-/*   Updated: 2025/02/03 17:33:43 by lfiorell         ###   ########.fr       */
+/*   Updated: 2025/02/04 13:47:07 by lfiorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "data.h"
+#include "job.h"
 
 static int	validate_argument(char *str)
 {
@@ -51,29 +52,45 @@ int	parse(int argc, char *argv[], int *stack)
 	return (0);
 }
 
+int	choose_input(int argc, char *argv[], char *const envp[], int **stack)
+{
+	int	res;
+
+	if (argc == 0)
+	{
+		res = kill_meeeeeeeeeeeeeeeee(envp, stack);
+		if (res < 0)
+			return (res);
+	}
+	else
+	{
+		*stack = ft_calloc(argc, sizeof(int));
+		if (*stack == NULL)
+			return (ERR_MALLOC);
+		parse(argc, argv, *stack);
+		return (ERR_MALLOC);
+		parse(argc, argv, *stack);
+	}
+	return (0);
+}
+
 int	parse_list(int argc, char *argv[], char *const envp[], t_data *data)
 {
-	int		*stack;
-	int		i;
-	char	*arg;
-	char	**split;
+	int	*stack;
+	int	*tmp;
+	int	i;
 
-	stack = ft_calloc(argc, sizeof(int));
-	if (stack == NULL)
-		return (ERR_MALLOC);
-	parse(argc, argv, stack);
-	if (envp_contains(envp, "ARG"))
+	choose_input(argc, argv, envp, &stack);
+	quicksort(stack, 0, argc - 1);
+	data->index = stack;
+	data->size = argc;
+	i = 0;
+	while (i < argc)
 	{
-		arg = envp_get(envp, "ARG");
-		split = ft_split(arg, ' ');
-		i = parse(ft_split_count(split), split, stack);
-		if (i < 0)
-		{
-			ft_split_free(split);
-			free(stack);
-			return (i);
-		}
+		tmp = malloc(sizeof(int));
+		*tmp = i;
+		ft_lstadd_back(&data->a, ft_lstnew(tmp));
+		i++;
 	}
-	(void)data;
 	return (0);
 }
