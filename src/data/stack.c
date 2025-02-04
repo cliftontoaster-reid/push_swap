@@ -6,7 +6,7 @@
 /*   By: lfiorell <lfiorell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 11:49:53 by lfiorell          #+#    #+#             */
-/*   Updated: 2025/02/04 14:31:03 by lfiorell         ###   ########.fr       */
+/*   Updated: 2025/02/04 16:03:46 by lfiorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@ static int	validate_argument(char *str)
 	int	j;
 
 	j = 0;
+	if (str[0] == '-')
+		j++;
+	if (str[j] == '\0')
+		return (0);
 	while (str[j])
 	{
 		if (!ft_isdigit(str[j]))
@@ -66,9 +70,9 @@ int	choose_input(int argc, char *argv[], char *const envp[], int **stack)
 		*stack = ft_calloc(argc, sizeof(int));
 		if (*stack == NULL)
 			return (ERR_MALLOC);
-		parse(argc, argv, *stack);
-		return (ERR_MALLOC);
-		parse(argc, argv, *stack);
+		res = parse(argc, argv, *stack);
+		if (res < 0)
+			return (res);
 		return (argc);
 	}
 }

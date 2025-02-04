@@ -6,7 +6,7 @@
 /*   By: lfiorell <lfiorell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:38:28 by lfiorell          #+#    #+#             */
-/*   Updated: 2025/02/04 14:41:55 by lfiorell         ###   ########.fr       */
+/*   Updated: 2025/02/04 16:11:10 by lfiorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,16 @@ void test_parse_envp()
   free(stack);
 }
 
+#define CU_ASSERT_LIST_CONTENT_EQ(list, expected)           \
+  do                                                        \
+  {                                                         \
+    CU_ASSERT_PTR_NOT_NULL_FATAL((list));                   \
+    CU_ASSERT_EQUAL(*(int *)((list)->content), (expected)); \
+  } while (0)
+
 void test_parse_list_args()
 {
-  char *argv[] = {(char *)"1", (char *)"2", (char *)"3", nullptr};
+  char *argv[] = {(char *)"1", (char *)"-5", (char *)"3", nullptr};
   int argc = 3;
 
   t_data *data;
@@ -78,7 +85,21 @@ void test_parse_list_args()
   data = (t_data *)malloc(sizeof(t_data));
   ft_bzero(data, sizeof(t_data));
 
-  parse_list(argc, argv, nullptr, data);
+  int res = parse_list(argc, argv, nullptr, data);
+
+  CU_ASSERT_EQUAL_FATAL(res, 0);
+
+  CU_ASSERT_LIST_CONTENT_EQ(data->a, 0);
+  CU_ASSERT_LIST_CONTENT_EQ(data->a->next, 1);
+  CU_ASSERT_LIST_CONTENT_EQ(data->a->next->next, 2);
+
+  CU_ASSERT_PTR_NULL(data->b);
 
   CU_ASSERT_EQUAL(data->size, 3);
+
+  CU_ASSERT_EQUAL(data->index[0], -5);
+  CU_ASSERT_EQUAL(data->index[1], 1);
+  CU_ASSERT_EQUAL(data->index[2], 3);
+
+  kill_thatguy(data);
 }
