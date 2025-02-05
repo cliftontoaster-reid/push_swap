@@ -6,7 +6,7 @@
 /*   By: lfiorell <lfiorell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 11:24:23 by lfiorell          #+#    #+#             */
-/*   Updated: 2025/02/04 13:37:01 by lfiorell         ###   ########.fr       */
+/*   Updated: 2025/02/04 17:27:48 by lfiorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,7 @@ int			ft_split_free(char **split);
 int			choose_input(int argc, char *argv[], char *const envp[],
 				int **stack);
 int			kill_meeeeeeeeeeeeeeeee(char *const envp[], int **stack);
+int			*clone_iarr(int *arr, int len);
+int			idx_of(int *arr, int len, int val);
 
 #endif

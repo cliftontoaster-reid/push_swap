@@ -6,7 +6,7 @@
 /*   By: lfiorell <lfiorell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 11:49:53 by lfiorell          #+#    #+#             */
-/*   Updated: 2025/02/04 16:03:46 by lfiorell         ###   ########.fr       */
+/*   Updated: 2025/02/04 17:30:30 by lfiorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,17 +86,21 @@ int	parse_list(int argc, char *argv[], char *const envp[], t_data *data)
 
 	len = choose_input(argc, argv, envp, &stack);
 	if (len < 0)
+	{
+		free(stack);
 		return (len);
-	quicksort(stack, 0, len - 1);
-	data->index = stack;
+	}
+	data->index = clone_iarr(stack, len);
+	quicksort(data->index, 0, len - 1);
 	data->size = len;
 	i = 0;
 	while (i < len)
 	{
 		tmp = malloc(sizeof(int));
-		*tmp = i;
+		*tmp = idx_of(data->index, len, stack[i]);
 		ft_lstadd_back(&data->a, ft_lstnew(tmp));
 		i++;
 	}
+	free(stack);
 	return (0);
 }
