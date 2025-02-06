@@ -6,13 +6,13 @@
 /*   By: lfiorell <lfiorell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:21:12 by lfiorell          #+#    #+#             */
-/*   Updated: 2025/02/04 14:40:07 by lfiorell         ###   ########.fr       */
+/*   Updated: 2025/02/06 12:13:06 by lfiorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "data.h"
 
-int	envp_contains(char *const envp[], char *key)
+int	envp_contains(char const *envp[], char *key)
 {
 	int	i;
 
@@ -26,7 +26,7 @@ int	envp_contains(char *const envp[], char *key)
 	return (0);
 }
 
-char	*envp_get(char *const envp[], char *key)
+const char	*envp_get(char const *envp[], char *key)
 {
 	int	i;
 
@@ -40,14 +40,14 @@ char	*envp_get(char *const envp[], char *key)
 	return (NULL);
 }
 
-int		parse(int argc, char *argv[], int *stack);
+int			parse(int argc, char *argv[], int *stack);
 
-int	kill_meeeeeeeeeeeeeeeee(char *const envp[], int **stack)
+int	kill_meeeeeeeeeeeeeeeee(char const *envp[], int **stack)
 {
-	int		i;
-	char	*arg;
-	char	**split;
-	int		argc;
+	int			i;
+	const char	*arg;
+	char		**split;
+	int			argc;
 
 	if (envp_contains(envp, "ARG") == 1)
 	{

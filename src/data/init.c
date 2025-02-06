@@ -6,7 +6,7 @@
 /*   By: lfiorell <lfiorell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 11:38:28 by lfiorell          #+#    #+#             */
-/*   Updated: 2025/02/04 12:38:03 by lfiorell         ###   ########.fr       */
+/*   Updated: 2025/02/05 13:56:42 by lfiorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@ void	zeroize(void *ptr)
 	free(ptr);
 }
 
+void	nokill(void *ptr)
+{
+	(void)ptr;
+}
+
 void	kill_thatguy(t_data *data)
 {
 	if (data->a)
@@ -36,7 +41,7 @@ void	kill_thatguy(t_data *data)
 	if (data->b)
 		ft_lstclear(&data->b, zeroize);
 	if (data->ops)
-		ft_lstclear(&data->ops, zeroize);
+		ft_lstclear(&data->ops, nokill);
 	if (data->index)
 		free(data->index);
 	ft_bzero(data, sizeof(t_data));

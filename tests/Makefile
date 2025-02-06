@@ -48,6 +48,9 @@ SRC	=	\
 	$(SRC_DIR)cmd/swap.cpp \
 		\
 	$(SRC_DIR)job/quicksort.cpp \
+	$(SRC_DIR)job/stack.cpp \
+	$(SRC_DIR)job/bitshift.cpp \
+	$(SRC_DIR)job/smol.cpp
 
 OBJ = $(patsubst $(SRC_DIR)%.cpp, $(OBJ_DIR)/%.o, $(SRC))
 EXT_OBJ ?= 

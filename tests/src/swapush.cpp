@@ -6,7 +6,7 @@
 /*   By: lfiorell <lfiorell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 15:00:15 by lfiorell          #+#    #+#             */
-/*   Updated: 2025/02/04 15:54:03 by lfiorell         ###   ########.fr       */
+/*   Updated: 2025/02/06 11:57:45 by lfiorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,23 @@ int main()
   //
   // quicksort.cpp
   CU_add_test(suite, "quicksort", test_quicksort);
+  //
+  // stack.cpp
+  CU_add_test(suite, "push_ops", test_push_ops);
+  CU_add_test(suite, "push_ops_null", test_push_ops_null);
+  CU_add_test(suite, "push_ops_multiple", test_push_ops_multiple);
+  CU_add_test(suite, "func_to_char", test_func_to_char);
+  //
+  // bitshift.cpp
+  CU_add_test(suite, "int_get_bit", test_int_get_bit);
+  CU_add_test(suite, "get_max_bits", test_get_max_bits);
+  CU_add_test(suite, "bitshift", test_bitshift);
+  CU_add_test(suite, "bitshift_random", test_bitshift_random);
+  //
+  // smol.cpp
+  CU_add_test(suite, "sort_two", test_sort_two);
+  CU_add_test(suite, "sort_three", test_sort_three);
+  CU_add_test(suite, "sort_four", test_sort_four);
   //
   CU_basic_run_tests();
   CU_cleanup_registry();

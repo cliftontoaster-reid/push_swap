@@ -6,7 +6,7 @@
 /*   By: lfiorell <lfiorell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 11:24:23 by lfiorell          #+#    #+#             */
-/*   Updated: 2025/02/04 17:27:48 by lfiorell         ###   ########.fr       */
+/*   Updated: 2025/02/06 12:12:57 by lfiorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,15 @@ typedef struct s_data
 
 t_data		*init_thatguy(void);
 void		kill_thatguy(t_data *data);
-int			parse_list(int argc, char *argv[], char *const envp[],
+int			parse_list(int argc, const char *argv[], char const *envp[],
 				t_data *data);
-int			envp_contains(char *const envp[], char *key);
-char		*envp_get(char *const envp[], char *key);
+int			envp_contains(char const *envp[], char *key);
+const char	*envp_get(char const *envp[], char *key);
 int			ft_split_count(char **split);
 int			ft_split_free(char **split);
-int			choose_input(int argc, char *argv[], char *const envp[],
+int			choose_input(int argc, const char *argv[], char const *envp[],
 				int **stack);
-int			kill_meeeeeeeeeeeeeeeee(char *const envp[], int **stack);
+int			kill_meeeeeeeeeeeeeeeee(char const *envp[], int **stack);
 int			*clone_iarr(int *arr, int len);
 int			idx_of(int *arr, int len, int val);
 

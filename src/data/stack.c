@@ -6,14 +6,14 @@
 /*   By: lfiorell <lfiorell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 11:49:53 by lfiorell          #+#    #+#             */
-/*   Updated: 2025/02/04 17:30:30 by lfiorell         ###   ########.fr       */
+/*   Updated: 2025/02/06 12:11:49 by lfiorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "data.h"
 #include "job.h"
 
-static int	validate_argument(char *str)
+static int	validate_argument(const char *str)
 {
 	int	j;
 
@@ -31,7 +31,7 @@ static int	validate_argument(char *str)
 	return (1);
 }
 
-int	parse(int argc, char *argv[], int *stack)
+int	parse(int argc, const char *argv[], int *stack)
 {
 	int	i;
 	int	k;
@@ -56,7 +56,7 @@ int	parse(int argc, char *argv[], int *stack)
 	return (0);
 }
 
-int	choose_input(int argc, char *argv[], char *const envp[], int **stack)
+int	choose_input(int argc, const char *argv[], char const *envp[], int **stack)
 {
 	int	res;
 
@@ -77,7 +77,7 @@ int	choose_input(int argc, char *argv[], char *const envp[], int **stack)
 	}
 }
 
-int	parse_list(int argc, char *argv[], char *const envp[], t_data *data)
+int	parse_list(int argc, const char *argv[], char const *envp[], t_data *data)
 {
 	int	*stack;
 	int	*tmp;

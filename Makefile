@@ -41,6 +41,9 @@ SRC = \
 	$(SRC_DIR)cmd/swap.c \
 	  \
 	$(SRC_DIR)job/quicksort.c \
+	$(SRC_DIR)job/stack.c \
+	$(SRC_DIR)job/bitshift.c \
+	$(SRC_DIR)job/smol.c \
 
 OBJ = $(patsubst $(SRC_DIR)%.c, $(OBJ_DIR)/push_swap/%.o, $(SRC))
 
