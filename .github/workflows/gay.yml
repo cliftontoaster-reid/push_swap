@@ -65,7 +65,7 @@ jobs:
         run: |
           git clone --branch v2 https://github.com/SimonCROS/push_swap_tester
           cd push_swap_tester
-          make fr
+          make -j$(nproc)
 
       - name: Get 42 checker
         run: |
