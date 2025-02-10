@@ -56,7 +56,7 @@ jobs:
           esac
 
       - name: Build project
-        run: make ${{ env.MAKE_FLAGS }}
+        run: make CC=${{ matrix.compiler }} ${{ env.MAKE_FLAGS }}
 
       - name: Run core tests
         run: make test
@@ -74,8 +74,9 @@ jobs:
 
       - name: Execute complexity tests
         run: |
-          ./push_swap_tester/complexity -f ./push_swap -o test_results.log 100 100 0 ./checker_linux
-          ./push_swap_tester/complexity -f ./push_swap -o test_results.log 500 100 0 ./checker_linux
+          THREADS=$(nproc)
+          ./push_swap_tester/complexity -t $THREADS -f ./push_swap -o test_results.log 100 100 700 ./checker_linux
+          ./push_swap_tester/complexity -t $THREADS -f ./push_swap -o test_results.log 500 100 5500 ./checker_linux
           cat test_results.log
 
       - name: Cleanup
