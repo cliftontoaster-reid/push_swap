@@ -3,9 +3,11 @@
     {
       "name": "Linux",
       "includePath": [
-        "${workspaceFolder}/include",
+        "${workspaceFolder}/include/**",
         "${workspaceFolder}/**",
-        "${workspaceFolder}/tests/"
+        "${workspaceFolder}/tests/**",
+        "${workspaceFolder}/cache/objs/tests/cunit/include/**",
+        "${workspaceFolder}/cache/objs/tests/cunit/include/"
       ],
       "defines": [],
       "compilerPath": "/usr/bin/clang",

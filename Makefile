@@ -1,9 +1,10 @@
 CC = clang
 
 SRC_DIR	=	src/
-OBJ_DIR	=	target/
 INC_DIR	=	include/
 LFT_DIR	=	libft/
+CACHE_DIR = cache/
+OBJ_DIR	=	$(CACHE_DIR)objs/
 LFT_VER = e9f828b6741b1061a21729b6d44a5c0989c24474
 _LIB_FT	=	$(LFT_DIR)libft.a
 
@@ -28,25 +29,21 @@ endif
 NAME = push_swap
 
 SRC = \
-	$(SRC_DIR)data.c \
-	$(SRC_DIR)utils.c \
-	 \
-	$(SRC_DIR)nbr/list_search.c \
-	$(SRC_DIR)nbr/math_list.c \
-	$(SRC_DIR)nbr/math_list_2.c \
-	 \
-	$(SRC_DIR)ope/enum.c \
-	$(SRC_DIR)ope/push.c \
-	$(SRC_DIR)ope/rizz_rotate.c \
-	$(SRC_DIR)ope/rotate.c \
-	$(SRC_DIR)ope/swap.c \
-	 \
-	$(SRC_DIR)str/find_lst.c \
-	 \
-	$(SRC_DIR)sort/brot_push.c \
-	$(SRC_DIR)sort/sort.c \
-	 \
-	$(SRC_DIR)infinite_pretzel/pretzel.c \
+	$(SRC_DIR)data/init.c \
+	$(SRC_DIR)data/stack.c \
+	$(SRC_DIR)data/split.c \
+	$(SRC_DIR)data/envp.c \
+	$(SRC_DIR)data/list.c \
+	    \
+	$(SRC_DIR)cmd/arc_rotate.c \
+	$(SRC_DIR)cmd/push.c \
+	$(SRC_DIR)cmd/rotate.c \
+	$(SRC_DIR)cmd/swap.c \
+	  \
+	$(SRC_DIR)job/quicksort.c \
+	$(SRC_DIR)job/stack.c \
+	$(SRC_DIR)job/bitshift.c \
+	$(SRC_DIR)job/smol.c \
 
 OBJ = $(patsubst $(SRC_DIR)%.c, $(OBJ_DIR)/push_swap/%.o, $(SRC))
 
@@ -78,15 +75,16 @@ shared: $(_LIB_FT) $(OBJ)
 
 test: shared
 	@$(MAKE) -C tests OBJ_DIR=$(abspath $(OBJ_DIR))/tests LFT_DIR=$(abspath $(LFT_DIR)) INC_DIR=$(abspath $(INC_DIR)) \
-		EXT_OBJ=$(abspath $(OBJ_DIR)$(NAME).a) LFT_VER=$(LFT_VER)
+		EXT_OBJ=$(abspath $(OBJ_DIR)$(NAME).a) LFT_VER=$(LFT_VER) CACHE_DIR=$(abspath $(CACHE_DIR))
 	@./tests/swapush
 
 clean:
 	rm -rf $(OBJ_DIR)
 nclean: clean
 	rm -f $(NAME)
+	$(MAKE) -C tests nclean
 fclean: nclean
-	rm -rf $(LFT_DIR)
+	rm -rf $(LFT_DIR) $(CACHE_DIR)
 
 re: fclean all
 qre: nclean all

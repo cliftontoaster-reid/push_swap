@@ -20,8 +20,11 @@ jobs:
 
       - name: Install dependencies
         run: |
+          echo "set man-db/auto-update false" | sudo debconf-communicate
+          sudo dpkg-reconfigure man-db
+
           sudo apt-get update
-          sudo apt-get install -y clang mold libcunit1-dev
+          sudo apt-get install -y clang mold
           python3 -m pip install --upgrade pip setuptools
           python3 -m pip install norminette
 
@@ -36,7 +39,7 @@ jobs:
 
       - name: Package artifacts
         run: |
-          XZ_OPT=-9 tar -Jcvf build-artifacts.tar.xz target
+          XZ_OPT=-9 tar -Jcvf build-artifacts.tar.xz cache
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
