@@ -6,7 +6,7 @@
 /*   By: lfiorell <lfiorell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 13:02:14 by lfiorell          #+#    #+#             */
-/*   Updated: 2025/02/06 12:19:04 by lfiorell         ###   ########.fr       */
+/*   Updated: 2025/02/10 21:49:49 by lfiorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,8 @@ void	bitshift(t_data *data)
 	int	i;
 	int	max_bits;
 
+	if (data->a == NULL)
+		return ;
 	if (is_sorted(data->a))
 		return ;
 	max_bits = get_max_bits(data->a);
