@@ -1,49 +1,96 @@
-name: Pretty gay tests
+name: CI/CD Pipeline with Extended Testing
 
 on:
   push:
     branches: ["main", "dev"]
+    paths:
+      - 'src/**'
+      - 'include/**'
+      - 'tests/**'
+      - 'Makefile'
+      - '.github/workflows/*.yml'
   pull_request:
     branches: ["main", "dev"]
 
 jobs:
-  test:
+  build-test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        compiler: [clang, gcc]
+        linker: [mold, lld, default]
+        include:
+          - compiler: clang
+            cc_package: clang
+          - compiler: gcc
+            cc_package: gcc
+        exclude:
+          - compiler: gcc
+            linker: mold
+
+    env:
+      CC: ${{ matrix.compiler }}
+      MAKE_FLAGS: -j$(nproc)
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - uses: actions/setup-python@v5
         with:
-          python-version: "3.13"
+          fetch-depth: 1
 
-      - name: Install dependencies
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/pip
+            libft/
+          key: ${{ runner.os }}-${{ matrix.compiler }}-${{ matrix.linker }}-${{ hashFiles('Makefile') }}
+
+      - name: Install toolchain
         run: |
-          echo "set man-db/auto-update false" | sudo debconf-communicate
-          sudo dpkg-reconfigure man-db
+          sudo apt-get update -qq
+          sudo apt-get install -yq --no-install-recommends ${{ matrix.cc_package }}
+          case "${{ matrix.linker }}" in
+            "mold") sudo apt-get install -yq mold ;;
+            "lld") sudo apt-get install -yq lld ;;
+          esac
 
-          sudo apt-get update
-          sudo apt-get install -y clang mold
-          python3 -m pip install --upgrade pip setuptools
-          python3 -m pip install norminette
+      - name: Build project
+        run: make ${{ env.MAKE_FLAGS }}
 
-      - name: Run norminette
+      - name: Run core tests
+        run: make test
+
+      - name: Setup complexity tester
         run: |
-          norminette --use-gitignore
+          git clone --branch v2 https://github.com/SimonCROS/push_swap_tester
+          cd push_swap_tester
+          make fr
 
-      - name: Build and test
+      - name: Get 42 checker
         run: |
-          make shared
-          make test
+          curl -so checker_linux https://cdn.intra.42.fr/document/document/28289/checker_linux
+          chmod +x checker_linux
 
-      - name: Package artifacts
+      - name: Execute complexity tests
         run: |
-          XZ_OPT=-9 tar -Jcvf build-artifacts.tar.xz cache
+          ./push_swap_tester/complexity -f ./push_swap -o test_results.log 100 100 0 ./checker_linux
+          ./push_swap_tester/complexity -f ./push_swap -o test_results.log 500 100 0 ./checker_linux
+          cat test_results.log
+
+      - name: Cleanup
+        run: |
+          make clean
+          rm -rf push_swap_tester checker_linux
+
+      - name: Archive results
+        if: always()
+        run: |
+          tar -czf test_artifacts.tgz cache/ test_results.log
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: build-artifacts
-          path: build-artifacts.tar.xz
-          retention-days: 1
+          name: ${{ matrix.compiler }}-${{ matrix.linker }}-results
+          path: test_artifacts.tgz
+          retention-days: 3
