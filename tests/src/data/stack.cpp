@@ -6,7 +6,7 @@
 /*   By: lfiorell <lfiorell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:38:28 by lfiorell          #+#    #+#             */
-/*   Updated: 2025/02/05 10:59:46 by lfiorell         ###   ########.fr       */
+/*   Updated: 2025/02/10 22:00:55 by lfiorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void test_parse_null_stack()
 {
   char *argv[] = {(char *)"123", nullptr};
   int *stack = nullptr;
-  int result = choose_input(1, argv, nullptr, &stack);
+  int result = choose_input(1, (const char **)argv, nullptr, &stack);
   CU_ASSERT_NOT_EQUAL(result, ERR_MALLOC);
   free(stack);
 }
@@ -37,7 +37,7 @@ void test_parse_invalid_arg()
 {
   char *argv[] = {(char *)"12x", nullptr};
   int *stack = nullptr;
-  int result = choose_input(1, argv, nullptr, &stack);
+  int result = choose_input(1, (const char **)argv, nullptr, &stack);
   CU_ASSERT_EQUAL(result, ERR_ARG_TYPE);
   free(stack);
 }
@@ -46,7 +46,7 @@ void test_parse_valid_args()
 {
   char *argv[] = {(char *)"123", (char *)"456", nullptr};
   int *stack = nullptr;
-  choose_input(2, argv, nullptr, &stack);
+  choose_input(2, (const char **)argv, nullptr, &stack);
   CU_ASSERT_PTR_NOT_NULL_FATAL(stack);
   CU_ASSERT_EQUAL(stack[0], 123);
   CU_ASSERT_EQUAL(stack[1], 456);
@@ -57,7 +57,7 @@ void test_parse_dupl_args()
 {
   char *argv[] = {(char *)"123", (char *)"123", nullptr};
   int *stack = nullptr;
-  int result = choose_input(2, argv, nullptr, &stack);
+  int result = choose_input(2, (const char **)argv, nullptr, &stack);
   CU_ASSERT_EQUAL(result, ERR_DUPL);
   free(stack);
 }
@@ -68,7 +68,7 @@ void test_parse_envp()
   char *envp[] = {(char *)"ARG=1 2 3"};
   char *argv[] = {nullptr};
   int argc = 0;
-  choose_input(argc, argv, envp, &stack);
+  choose_input(argc, (const char **)argv, (const char **)envp, &stack);
 
   CU_ASSERT_PTR_NOT_NULL_FATAL(stack);
   CU_ASSERT_EQUAL(stack[0], 1);
@@ -88,7 +88,7 @@ void test_parse_list_args()
   data = (t_data *)malloc(sizeof(t_data));
   ft_bzero(data, sizeof(t_data));
 
-  int res = parse_list(argc, argv, nullptr, data);
+  int res = parse_list(argc, (const char **)argv, nullptr, data);
   if (res != 0)
   {
     kill_thatguy(data);
