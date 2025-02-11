@@ -74,9 +74,8 @@ jobs:
       - name: Execute complexity tests
         run: |
           THREADS=$(nproc)
-          ./push_swap_tester/complexity -t $THREADS -f ./push_swap -o test_results.log 100 100 700 ./checker_linux
-          ./push_swap_tester/complexity -t $THREADS -f ./push_swap -o test_results.log 500 100 5500 ./checker_linux
-          cat test_results.log
+          ./push_swap_tester/complexity -t $THREADS -f ./push_swap -o test_result1.log 100 500 1100 ./checker_linux
+          ./push_swap_tester/complexity -t $THREADS -f ./push_swap -o test_result2.log 500 500 7700 ./checker_linux
 
       - name: Cleanup
         run: |
@@ -86,7 +85,7 @@ jobs:
       - name: Archive results
         if: always()
         run: |
-          tar -czf test_artifacts.tgz cache/ test_results.log
+          tar -czf test_artifacts.tgz cache/ test_result1.log test_result2.log
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
