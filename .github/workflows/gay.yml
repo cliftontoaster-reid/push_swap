@@ -30,7 +30,6 @@ jobs:
 
     env:
       CC: ${{ matrix.compiler }}
-      MAKE_FLAGS: -j$(nproc)
 
     steps:
       - name: Checkout code
@@ -56,7 +55,7 @@ jobs:
           esac
 
       - name: Build project
-        run: make CC=${{ matrix.compiler }} ${{ env.MAKE_FLAGS }}
+        run: make CC=${{ matrix.compiler }}
 
       - name: Run core tests
         run: make test
