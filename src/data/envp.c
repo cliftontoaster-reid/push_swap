@@ -6,7 +6,7 @@
 /*   By: lfiorell <lfiorell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:21:12 by lfiorell          #+#    #+#             */
-/*   Updated: 2025/02/06 12:13:06 by lfiorell         ###   ########.fr       */
+/*   Updated: 2025/02/11 16:22:47 by lfiorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ int	kill_meeeeeeeeeeeeeeeee(char const *envp[], int **stack)
 	char		**split;
 	int			argc;
 
+	if (!envp)
+		return (ERR_MALLOC);
 	if (envp_contains(envp, "ARG") == 1)
 	{
 		arg = envp_get(envp, "ARG");

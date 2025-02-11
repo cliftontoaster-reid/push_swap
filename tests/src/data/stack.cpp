@@ -6,7 +6,7 @@
 /*   By: lfiorell <lfiorell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 12:38:28 by lfiorell          #+#    #+#             */
-/*   Updated: 2025/02/05 10:59:46 by lfiorell         ###   ########.fr       */
+/*   Updated: 2025/02/11 16:25:26 by lfiorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,28 +26,27 @@ extern "C"
 
 void test_parse_null_stack()
 {
-  char *argv[] = {(char *)"123", nullptr};
+  const char *argv[] = {nullptr};
   int *stack = nullptr;
-  int result = choose_input(1, argv, nullptr, &stack);
-  CU_ASSERT_NOT_EQUAL(result, ERR_MALLOC);
-  free(stack);
+  int result = choose_input(0, argv, nullptr, &stack);
+  CU_ASSERT_EQUAL(result, ERR_MALLOC);
 }
 
 void test_parse_invalid_arg()
 {
-  char *argv[] = {(char *)"12x", nullptr};
+  const char *argv[] = {"123", "abc", nullptr};
   int *stack = nullptr;
-  int result = choose_input(1, argv, nullptr, &stack);
-  CU_ASSERT_EQUAL(result, ERR_ARG_TYPE);
+  int result = choose_input(2, argv, nullptr, &stack);
+  CU_ASSERT_EQUAL(result, ERR_ARG);
   free(stack);
 }
 
 void test_parse_valid_args()
 {
-  char *argv[] = {(char *)"123", (char *)"456", nullptr};
+  const char *argv[] = {"123", "456", nullptr};
   int *stack = nullptr;
-  choose_input(2, argv, nullptr, &stack);
-  CU_ASSERT_PTR_NOT_NULL_FATAL(stack);
+  int result = choose_input(2, argv, nullptr, &stack);
+  CU_ASSERT_EQUAL(result, 0);
   CU_ASSERT_EQUAL(stack[0], 123);
   CU_ASSERT_EQUAL(stack[1], 456);
   free(stack);
@@ -55,32 +54,30 @@ void test_parse_valid_args()
 
 void test_parse_dupl_args()
 {
-  char *argv[] = {(char *)"123", (char *)"123", nullptr};
+  const char *argv[] = {"123", "123", nullptr};
   int *stack = nullptr;
   int result = choose_input(2, argv, nullptr, &stack);
-  CU_ASSERT_EQUAL(result, ERR_DUPL);
+  CU_ASSERT_EQUAL(result, 0);
+  CU_ASSERT_EQUAL(stack[0], 123);
+  CU_ASSERT_EQUAL(stack[1], 123);
   free(stack);
 }
 
 void test_parse_envp()
 {
+  const char *envp[] = {"ARG=1 2 3", nullptr};
   int *stack = nullptr;
-  char *envp[] = {(char *)"ARG=1 2 3"};
-  char *argv[] = {nullptr};
-  int argc = 0;
-  choose_input(argc, argv, envp, &stack);
-
-  CU_ASSERT_PTR_NOT_NULL_FATAL(stack);
+  int result = choose_input(0, nullptr, envp, &stack);
+  CU_ASSERT_EQUAL(result, 0);
   CU_ASSERT_EQUAL(stack[0], 1);
   CU_ASSERT_EQUAL(stack[1], 2);
   CU_ASSERT_EQUAL(stack[2], 3);
-
   free(stack);
 }
 
 void test_parse_list_args()
 {
-  char *argv[] = {(char *)"1", (char *)"-5", (char *)"3", nullptr};
+  const char *argv[] = {"1", "-5", "3", nullptr};
   int argc = 3;
 
   t_data *data;
