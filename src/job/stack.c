@@ -6,12 +6,13 @@
 /*   By: lfiorell <lfiorell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 13:53:09 by lfiorell          #+#    #+#             */
-/*   Updated: 2025/02/05 14:50:40 by lfiorell         ###   ########.fr       */
+/*   Updated: 2025/02/11 03:56:40 by lfiorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmd.h"
 #include "job.h"
+#include <stdint.h>
 
 void	push_ops(t_data *data, void (*op)(t_list **, t_list **))
 {
@@ -20,7 +21,7 @@ void	push_ops(t_data *data, void (*op)(t_list **, t_list **))
 	if (op == NULL)
 		return ;
 	op(&data->a, &data->b);
-	new = ft_lstnew((void *)op);
+	new = ft_lstnew((void *)(uintptr_t)op);
 	if (new == NULL)
 		return ;
 	ft_lstadd_back(&data->ops, new);
@@ -61,7 +62,8 @@ void	print_ops(t_data *owo)
 	ops = owo->ops;
 	while (ops)
 	{
-		op = func_to_char((void (*)(t_list **, t_list **))ops->content);
+		op = func_to_char((void (*)(t_list **,
+						t_list **))(uintptr_t)ops->content);
 		ft_putendl_fd(op, 1);
 		ops = ops->next;
 	}

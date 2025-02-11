@@ -6,7 +6,7 @@
 /*   By: lfiorell <lfiorell@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 11:49:53 by lfiorell          #+#    #+#             */
-/*   Updated: 2025/02/06 12:11:49 by lfiorell         ###   ########.fr       */
+/*   Updated: 2025/02/11 04:21:36 by lfiorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int	choose_input(int argc, const char *argv[], char const *envp[], int **stack)
 
 	if (argc == 0)
 	{
+		*stack = NULL; // Ensure stack is initialized to NULL
 		res = kill_meeeeeeeeeeeeeeeee(envp, stack);
 		return (res);
 	}

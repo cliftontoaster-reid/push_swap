@@ -5,15 +5,18 @@ INC_DIR	=	include/
 LFT_DIR	=	libft/
 CACHE_DIR = cache/
 OBJ_DIR	=	$(CACHE_DIR)objs/
-LFT_VER = e9f828b6741b1061a21729b6d44a5c0989c24474
+LFT_VER = de93b679bd3ad136e195652376a1e714cff6bc55
 _LIB_FT	=	$(LFT_DIR)libft.a
 
-SANITIZE = -fsanitize=undefined -fsanitize=address
+ifeq ($(FSANETISE),true)
+	SANITIZE = -fsanitize=undefined -fsanitize=address
+endif
+
 DEBUG = -g
 
 CFLAGS = -Wall -Wextra -Werror -Wpedantic -std=c17 $(DEBUG) -O3 \
-         -I$(INC_DIR) -I$(LFT_DIR)include -I$(LFT_DIR) $(SANITIZE) \
-         -MMD
+		 -I$(INC_DIR) -I$(LFT_DIR)include -I$(LFT_DIR) $(SANITIZE) \
+		 -MMD
 LDFLAGS = $(SANITIZE)
 
 MOLD_LINKER := $(shell command -v mold 2> /dev/null)
