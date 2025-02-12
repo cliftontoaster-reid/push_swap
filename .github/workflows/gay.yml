@@ -55,10 +55,10 @@ jobs:
           esac
 
       - name: Build project
-        run: make CC=${{ matrix.compiler }}
+        run: make CC=${{ matrix.compiler }} -j$(nproc)
 
       - name: Run core tests
-        run: make test
+        run: make test -j$(nproc)
 
       - name: Setup complexity tester
         run: |
