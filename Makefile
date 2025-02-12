@@ -57,7 +57,7 @@ DEPFILES = $(OBJ:.o=.d)
 
 all: $(NAME)
 
-$(NAME): $(_LIB_FT) $(OBJ)
+$(NAME): $(OBJ)
 	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $(OBJ) $(LIB_FLAGS)
 	@if [ -n "$(MOLD_LINKER)" ]; then \
 		echo "Linked $@ using mold"; \
@@ -78,7 +78,7 @@ $(_LIB_FT):
 		fi
 	$(MAKE) -C $(LFT_DIR) OBJ_DIR=$(abspath $(OBJ_DIR))/libft
 
-$(OBJ_DIR)/push_swap/%.o: $(SRC_DIR)%.c
+$(OBJ_DIR)/push_swap/%.o: $(SRC_DIR)%.c $(_LIB_FT)
 	@mkdir -p $(@D)
 	$(CC) $(CFLAGS) -c -o $@ $<
 	@echo "Compiled $<"
