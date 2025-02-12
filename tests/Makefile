@@ -57,7 +57,7 @@ EXT_OBJ ?=
 
 all: $(NAME)
 
-$(NAME): $(CUNIT_LIB) $(_LIB_FT) $(OBJ)
+$(NAME): $(OBJ)
 	@$(CCX) $(LDFLAGS) -o $@ $(OBJ) $(EXT_OBJ) \
 		-Wl,--whole-archive $(_LIB_FT) -Wl,--no-whole-archive
 ifneq ($(MOLD_LINKER),)
@@ -91,7 +91,7 @@ $(CUNIT_LIB):
 	@echo "Installing CUnit..."
 	@$(MAKE) -C $(CUNIT_DIR) install > /dev/null
 
-$(OBJ_DIR)%.o: $(SRC_DIR)%.cpp
+$(OBJ_DIR)%.o: $(SRC_DIR)%.cpp $(CUNIT_LIB) $(_LIB_FT)
 	@mkdir -p $(dir $@)
 	@$(CCX) $(CFLAGS) -c -o $@ $<
 	@echo "Compiled $<"
