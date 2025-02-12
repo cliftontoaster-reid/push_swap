@@ -42,7 +42,6 @@ jobs:
         with:
           path: |
             ~/.cache/pip
-            libft/
           key: ${{ runner.os }}-${{ matrix.compiler }}-${{ matrix.linker }}-${{ hashFiles('Makefile') }}
 
       - name: Install toolchain

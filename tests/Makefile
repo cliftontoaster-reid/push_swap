@@ -71,7 +71,7 @@ endif
 $(_LIB_FT):
 	@if [ ! -d $(LFT_DIR) ]; then git clone https://github.com/cliftontoaster-reid/libft $(LFT_DIR); fi
 	@cd $(LFT_DIR) && git checkout $(LFT_VER) && cd ..
-	$(MAKE) -C $(LFT_DIR) OBJ_DIR=$(abspath $(OBJ_DIR))/libft
+	$(MAKE) -C $(LFT_DIR) OBJ_DIR=$(abspath $(OBJ_DIR))/libft -j$(nproc)
 
 $(CUNIT_LIB):
 	@mkdir -p $(OBJ_DIR) $(CACHE_DIR)

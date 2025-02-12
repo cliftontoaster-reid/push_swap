@@ -76,7 +76,7 @@ $(_LIB_FT):
 		if [ "$$current_commit" != "$(LFT_VER)" ]; then \
 			git fetch origin && git checkout $(LFT_VER); \
 		fi
-	$(MAKE) -C $(LFT_DIR) OBJ_DIR=$(abspath $(OBJ_DIR))/libft
+	$(MAKE) -C $(LFT_DIR) OBJ_DIR=$(abspath $(OBJ_DIR))/libft -j$(nproc)
 
 $(OBJ_DIR)/push_swap/%.o: $(SRC_DIR)%.c $(_LIB_FT)
 	@mkdir -p $(@D)
