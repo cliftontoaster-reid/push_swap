@@ -69,7 +69,7 @@ $(NAME): $(OBJ)
 
 $(_LIB_FT):
 	@if [ ! -d "$(LFT_DIR)" ]; then \
-		git clone https://github.com/cliftontoaster-reid/libft $(LFT_DIR); \
+		git clone https://seed.radicle.garden/z4xiekV66Dw3AhVVnp7c93hC5aD6.git $(LFT_DIR); \
 	fi
 	@cd $(LFT_DIR) && \
 		current_commit=$$(git rev-parse HEAD); \
