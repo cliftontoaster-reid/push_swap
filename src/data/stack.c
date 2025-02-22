@@ -62,7 +62,7 @@ int	choose_input(int argc, const char *argv[], char const *envp[], int **stack)
 
 	if (argc == 0)
 	{
-		*stack = NULL; // Ensure stack is initialized to NULL
+		*stack = NULL;
 		res = kill_meeeeeeeeeeeeeeeee(envp, stack);
 		return (res);
 	}
