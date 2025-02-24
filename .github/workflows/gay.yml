@@ -99,6 +99,6 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.compiler }}-${{ matrix.linker }}-results
+          name: ${{ runner.os }}-${{ matrix.compiler }}-${{ matrix.linker }}-cache
           path: test_artifacts.tgz
           retention-days: 3
