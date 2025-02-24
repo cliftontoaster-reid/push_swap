@@ -85,10 +85,3 @@ jobs:
           THREADS=$(nproc)
           ./push_swap_tester/complexity -t $THREADS -f ./push_swap -o test_result1.log 100 500 1100 ./checker_linux
           ./push_swap_tester/complexity -t $THREADS -f ./push_swap -o test_result2.log 500 500 7700 ./checker_linux
-
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ runner.os }}-${{ matrix.compiler }}-${{ matrix.linker }}-cache-${{ github.run_id }}-${{ github.run_number }}-${{ github.sha }}
-          path: cache
-          retention-days: 3
