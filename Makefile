@@ -17,7 +17,7 @@ DEBUG = -g
 CFLAGS = -Wall -Wextra -Werror -Wpedantic -std=c17 $(DEBUG) -O3 \
 		 -I$(INC_DIR) -I$(LFT_DIR)include -I$(LFT_DIR) $(SANITIZE) \
 		 -MMD
-LDFLAGS = $(SANITIZE)
+LDFLAGS = $(SANITIZE) -Wl,-O3,--as-needed
 
 MOLD_LINKER := $(shell command -v mold 2> /dev/null)
 LLD_LINKER := $(shell command -v ld.lld 2> /dev/null)
