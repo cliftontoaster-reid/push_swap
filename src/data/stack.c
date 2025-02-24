@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfiorell <lfiorell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: creid <creid@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 11:49:53 by lfiorell          #+#    #+#             */
-/*   Updated: 2025/02/11 16:21:47 by lfiorell         ###   ########.fr       */
+/*   Updated: 2025/02/24 15:12:56 by creid            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,18 @@ int	parse(int argc, const char *argv[], int *stack)
 	return (0);
 }
 
+static int	same_arg(const char *argv[], int **stack)
+{
+	int		res;
+	char	*eee;
+
+	*stack = NULL;
+	eee = ft_strjoin("ARG=", argv[0]);
+	res = kill_meeeeeeeeeeeeeeeee((const char **)&eee, stack);
+	free(eee);
+	return (res);
+}
+
 int	choose_input(int argc, const char *argv[], char const *envp[], int **stack)
 {
 	int	res;
@@ -68,6 +80,8 @@ int	choose_input(int argc, const char *argv[], char const *envp[], int **stack)
 	}
 	else
 	{
+		if (ft_strchr(argv[0], ' '))
+			return (same_arg(argv, stack));
 		*stack = ft_calloc(argc, sizeof(int));
 		if (*stack == NULL)
 			return (ERR_MALLOC);

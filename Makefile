@@ -79,6 +79,7 @@ $(NAME): $(OBJ)
 	@echo " ░                                                                                             ░                                                                    "
 
 $(LFT_DIR):
+	@echo "Cloning libft"
 	@if [ -n "$(shell command -v rad 2> /dev/null)" ]; then \
 		rad node start; \
 		rad clone rad:z4xiekV66Dw3AhVVnp7c93hC5aD6 $(LFT_DIR); \
@@ -90,9 +91,12 @@ $(LFT_DIR):
 		if [ "$$current_commit" != "$(LFT_VER)" ]; then \
 			git fetch &> /dev/null && git checkout $(LFT_VER) &> /dev/null; \
 		fi
+	@echo "Cloned libft"
 
 $(_LIB_FT): $(LFT_DIR)
+	@echo "Compiling libft"
 	@$(MAKE) -C $(LFT_DIR) OBJ_DIR=$(abspath $(OBJ_DIR))/libft -j$(nproc) > /dev/null
+	@echo "Compiled libft"
 
 $(OBJ_DIR)/push_swap/%.o: $(SRC_DIR)%.c $(_LIB_FT)
 	@mkdir -p $(@D)
@@ -112,6 +116,7 @@ test: shared
 
 clean:
 	rm -rf $(OBJ_DIR)
+	$(MAKE) -C tests clean
 
 nclean: clean
 	rm -f $(NAME)
@@ -119,6 +124,7 @@ nclean: clean
 
 fclean: nclean
 	rm -rf $(LFT_DIR) $(CACHE_DIR)
+	$(MAKE) -C tests fclean
 
 re: fclean all
 
