@@ -36,6 +36,8 @@ jobs:
         exclude:
           - compiler: gcc
             linker: mold
+          - os: ubuntu-24.04
+            linker: mold
 
     env:
       CC: ${{ matrix.compiler }}
