@@ -5,7 +5,7 @@ INC_DIR	=	include/
 LFT_DIR	=	libft/
 CACHE_DIR = cache/
 OBJ_DIR	=	$(CACHE_DIR)objs/
-LFT_VER = de93b679bd3ad136e195652376a1e714cff6bc55
+LFT_VER = ee426dcfdabc734f813b25a4032ce8423d27048b
 _LIB_FT	=	$(LFT_DIR)libft.a
 
 ifeq ($(FSANETISE),true)
