@@ -37,7 +37,7 @@ void test_parse_invalid_arg()
   const char *argv[] = {"123", "abc", nullptr};
   int *stack = nullptr;
   int result = choose_input(2, argv, nullptr, &stack);
-  CU_ASSERT_EQUAL(result, ERR_ARG);
+  CU_ASSERT_EQUAL(result, ERR_ARG_TYPE);
   free(stack);
 }
 
@@ -46,7 +46,7 @@ void test_parse_valid_args()
   const char *argv[] = {"123", "456", nullptr};
   int *stack = nullptr;
   int result = choose_input(2, argv, nullptr, &stack);
-  CU_ASSERT_EQUAL(result, 0);
+  CU_ASSERT_EQUAL(result, 2);
   CU_ASSERT_EQUAL(stack[0], 123);
   CU_ASSERT_EQUAL(stack[1], 456);
   free(stack);
@@ -57,7 +57,7 @@ void test_parse_dupl_args()
   const char *argv[] = {"123", "123", nullptr};
   int *stack = nullptr;
   int result = choose_input(2, argv, nullptr, &stack);
-  CU_ASSERT_EQUAL(result, 0);
+  CU_ASSERT_EQUAL(result, ERR_DUPL);
   CU_ASSERT_EQUAL(stack[0], 123);
   CU_ASSERT_EQUAL(stack[1], 123);
   free(stack);
@@ -68,7 +68,7 @@ void test_parse_envp()
   const char *envp[] = {"ARG=1 2 3", nullptr};
   int *stack = nullptr;
   int result = choose_input(0, nullptr, envp, &stack);
-  CU_ASSERT_EQUAL(result, 0);
+  CU_ASSERT_EQUAL(result, 3);
   CU_ASSERT_EQUAL(stack[0], 1);
   CU_ASSERT_EQUAL(stack[1], 2);
   CU_ASSERT_EQUAL(stack[2], 3);
