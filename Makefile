@@ -84,6 +84,7 @@ $(LFT_DIR):
 		rad node start; \
 		rad clone rad:z4xiekV66Dw3AhVVnp7c93hC5aD6 $(LFT_DIR); \
 	else \
+		notify-send --icon=issue-symbolic --app-name="ToastCo" "Radicle not installed" "We would like to inform you that the Radicle collaboration stack is not currently available on the system. Therefore, Git will be used instead. If you would like to learn more about this, please visit https://radicle.xyz/."; \
 		git clone https://seed.radicle.garden/z4xiekV66Dw3AhVVnp7c93hC5aD6.git $(LFT_DIR); \
 	fi
 	@cd $(LFT_DIR) &> /dev/null && \
