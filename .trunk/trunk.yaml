@@ -19,9 +19,9 @@ lint:
   enabled:
     - markdownlint@0.44.0
     - actionlint@1.7.7
-    - checkov@3.2.372
+    - checkov@3.2.373
     - git-diff-check
-    - prettier@3.5.1
+    - prettier@3.5.2
     - trufflehog@3.88.12
     - yamllint@1.35.1
 actions:
