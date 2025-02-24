@@ -66,21 +66,37 @@ $(NAME): $(OBJ)
 	else \
 		echo "Linked $@ using default linker"; \
 	fi
+	@echo ""
+	@echo "  ▄████▄   ▒█████   ███▄ ▄███▓ ██▓███   ██▓ ██▓    ▄▄▄     ▄▄▄█████▓ ██▓ ▒█████   ███▄    █     ▄████▄   ▒█████   ███▄ ▄███▓ ██▓███   ██▓    ▓█████▄▄▄█████▓▓█████  "
+	@echo " ▒██▀ ▀█  ▒██▒  ██▒▓██▒▀█▀ ██▒▓██░  ██▒▓██▒▓██▒   ▒████▄   ▓  ██▒ ▓▒▓██▒▒██▒  ██▒ ██ ▀█   █    ▒██▀ ▀█  ▒██▒  ██▒▓██▒▀█▀ ██▒▓██░  ██▒▓██▒    ▓█   ▀▓  ██▒ ▓▒▓█   ▀  "
+	@echo " ▒▓█    ▄ ▒██░  ██▒▓██    ▓██░▓██░ ██▓▒▒██▒▒██░   ▒██  ▀█▄ ▒ ▓██░ ▒░▒██▒▒██░  ██▒▓██  ▀█ ██▒   ▒▓█    ▄ ▒██░  ██▒▓██    ▓██░▓██░ ██▓▒▒██░    ▒███  ▒ ▓██░ ▒░▒███    "
+	@echo " ▒▓▓▄ ▄██▒▒██   ██░▒██    ▒██ ▒██▄█▓▒ ▒░██░▒██░   ░██▄▄▄▄██░ ▓██▓ ░ ░██░▒██   ██░▓██▒  ▐▌██▒   ▒▓▓▄ ▄██▒▒██   ██░▒██    ▒██ ▒██▄█▓▒ ▒▒██░    ▒▓█  ▄░ ▓██▓ ░ ▒▓█  ▄  "
+	@echo " ▒ ▓███▀ ░░ ████▓▒░▒██▒   ░██▒▒██▒ ░  ░░██░░██████▒▓█   ▓██▒ ▒██▒ ░ ░██░░ ████▓▒░▒██░   ▓██░   ▒ ▓███▀ ░░ ████▓▒░▒██▒   ░██▒▒██▒ ░  ░░██████▒░▒████▒ ▒██▒ ░ ░▒████▒ "
+	@echo " ░ ░▒ ▒  ░░ ▒░▒░▒░ ░ ▒░   ░  ░▒▓▒░ ░  ░░▓  ░ ▒░▓  ░▒▒   ▓▒█░ ▒ ░░   ░▓  ░ ▒░▒░▒░ ░ ▒░   ▒ ▒    ░ ░▒ ▒  ░░ ▒░▒░▒░ ░ ▒░   ░  ░▒▓▒░ ░  ░░ ▒░▓  ░░░ ▒░ ░ ▒ ░░   ░░ ▒░ ░ "
+	@echo "   ░  ▒     ░ ▒ ▒░ ░  ░      ░░▒ ░      ▒ ░░ ░ ▒  ░ ▒   ▒▒ ░   ░     ▒ ░  ░ ▒ ▒░ ░ ░░   ░ ▒░     ░  ▒     ░ ▒ ▒░ ░  ░      ░░▒ ░     ░ ░ ▒  ░ ░ ░  ░   ░     ░ ░  ░ "
+	@echo " ░        ░ ░ ░ ▒  ░      ░   ░░        ▒ ░  ░ ░    ░   ▒    ░       ▒ ░░ ░ ░ ▒     ░   ░ ░    ░        ░ ░ ░ ▒  ░      ░   ░░         ░ ░      ░    ░         ░    "
+	@echo " ░ ░          ░ ░         ░             ░      ░  ░     ░  ░         ░      ░ ░           ░    ░ ░          ░ ░         ░                ░  ░   ░  ░           ░  ░ "
+	@echo " ░                                                                                             ░                                                                    "
 
-$(_LIB_FT):
-	@if [ ! -d "$(LFT_DIR)" ]; then \
+$(LFT_DIR):
+	@if [ -n "$(shell command -v rad 2> /dev/null)" ]; then \
+		rad node start; \
+		rad clone rad:z4xiekV66Dw3AhVVnp7c93hC5aD6 $(LFT_DIR); \
+	else \
 		git clone https://seed.radicle.garden/z4xiekV66Dw3AhVVnp7c93hC5aD6.git $(LFT_DIR); \
 	fi
-	@cd $(LFT_DIR) && \
-		current_commit=$$(git rev-parse HEAD); \
+	@cd $(LFT_DIR) &> /dev/null && \
+		current_commit=$$(git rev-parse HEAD) && \
 		if [ "$$current_commit" != "$(LFT_VER)" ]; then \
-			git fetch origin && git checkout $(LFT_VER); \
+			git fetch &> /dev/null && git checkout $(LFT_VER) &> /dev/null; \
 		fi
-	$(MAKE) -C $(LFT_DIR) OBJ_DIR=$(abspath $(OBJ_DIR))/libft -j$(nproc)
+
+$(_LIB_FT): $(LFT_DIR)
+	@$(MAKE) -C $(LFT_DIR) OBJ_DIR=$(abspath $(OBJ_DIR))/libft -j$(nproc) > /dev/null
 
 $(OBJ_DIR)/push_swap/%.o: $(SRC_DIR)%.c $(_LIB_FT)
 	@mkdir -p $(@D)
-	$(CC) $(CFLAGS) -c -o $@ $<
+	@$(CC) $(CFLAGS) -c -o $@ $<
 	@echo "Compiled $<"
 
 -include $(DEPFILES)
