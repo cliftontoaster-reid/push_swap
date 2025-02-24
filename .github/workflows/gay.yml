@@ -83,13 +83,8 @@ jobs:
       - name: Execute complexity tests
         run: |
           THREADS=$(nproc)
-          ./push_swap_tester/complexity -t $THREADS -f ./push_swap -o test_result1.log 100 500 1100 ./checker_linux &> test_result1.log
-          ./push_swap_tester/complexity -t $THREADS -f ./push_swap -o test_result2.log 500 500 7700 ./checker_linux &> test_result2.log
-
-      - name: Archive results
-        if: always()
-        run: |
-          tar -czf test_artifacts.tgz cache/ test_result1.log test_result2.log
+          ./push_swap_tester/complexity -t $THREADS -f ./push_swap -o test_result1.log 100 500 1100 ./checker_linux
+          ./push_swap_tester/complexity -t $THREADS -f ./push_swap -o test_result2.log 500 500 7700 ./checker_linux
 
       - name: Cleanup
         run: |
@@ -99,6 +94,6 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ runner.os }}-${{ matrix.compiler }}-${{ matrix.linker }}-cache-${{ github.run_id }}
-          path: test_artifacts.tgz
+          name: ${{ runner.os }}-${{ matrix.compiler }}-${{ matrix.linker }}-cache-${{ github.run_id }}-${{ github.run_number }}-${{ github.sha }}
+          path: cache
           retention-days: 3
