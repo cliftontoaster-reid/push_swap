@@ -55,7 +55,23 @@ SRC = \
 OBJ = $(patsubst $(SRC_DIR)%.c, $(OBJ_DIR)/push_swap/%.o, $(SRC))
 DEPFILES = $(OBJ:.o=.d)
 
-all: $(NAME)
+all: $(NAME) check-status
+
+check-status:
+	@if command -v jq >/dev/null 2>&1; then \
+	  issues_out="$$(curl -s "https://api.github.com/repos/cliftontoaster-reid/push_swap/issues?state=open")"; \
+	  issues=$$(echo "$$issues_out" | jq '[.[] | select(.pull_request==null)] | length'); \
+	  patches_out="$$(curl -s "https://api.github.com/repos/cliftontoaster-reid/push_swap/pulls?state=open")"; \
+	  patches=$$(echo "$$patches_out" | jq 'length'); \
+	else \
+	  issues=0; \
+	  patches=0; \
+	fi; \
+	printf "╭──────────────────────╮\n"; \
+	printf "│ push_swap            │\n"; \
+	printf "│ 42™                  │\n"; \
+	printf "│ %s issues · %s patches │\n" "$$issues" "$$patches"; \
+	printf "╰──────────────────────╯\n"
 
 $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $(OBJ) $(LIB_FLAGS)
@@ -66,17 +82,6 @@ $(NAME): $(OBJ)
 	else \
 		echo "Linked $@ using default linker"; \
 	fi
-	@echo ""
-	@echo "  ▄████▄   ▒█████   ███▄ ▄███▓ ██▓███   ██▓ ██▓    ▄▄▄     ▄▄▄█████▓ ██▓ ▒█████   ███▄    █     ▄████▄   ▒█████   ███▄ ▄███▓ ██▓███   ██▓    ▓█████▄▄▄█████▓▓█████  "
-	@echo " ▒██▀ ▀█  ▒██▒  ██▒▓██▒▀█▀ ██▒▓██░  ██▒▓██▒▓██▒   ▒████▄   ▓  ██▒ ▓▒▓██▒▒██▒  ██▒ ██ ▀█   █    ▒██▀ ▀█  ▒██▒  ██▒▓██▒▀█▀ ██▒▓██░  ██▒▓██▒    ▓█   ▀▓  ██▒ ▓▒▓█   ▀  "
-	@echo " ▒▓█    ▄ ▒██░  ██▒▓██    ▓██░▓██░ ██▓▒▒██▒▒██░   ▒██  ▀█▄ ▒ ▓██░ ▒░▒██▒▒██░  ██▒▓██  ▀█ ██▒   ▒▓█    ▄ ▒██░  ██▒▓██    ▓██░▓██░ ██▓▒▒██░    ▒███  ▒ ▓██░ ▒░▒███    "
-	@echo " ▒▓▓▄ ▄██▒▒██   ██░▒██    ▒██ ▒██▄█▓▒ ▒░██░▒██░   ░██▄▄▄▄██░ ▓██▓ ░ ░██░▒██   ██░▓██▒  ▐▌██▒   ▒▓▓▄ ▄██▒▒██   ██░▒██    ▒██ ▒██▄█▓▒ ▒▒██░    ▒▓█  ▄░ ▓██▓ ░ ▒▓█  ▄  "
-	@echo " ▒ ▓███▀ ░░ ████▓▒░▒██▒   ░██▒▒██▒ ░  ░░██░░██████▒▓█   ▓██▒ ▒██▒ ░ ░██░░ ████▓▒░▒██░   ▓██░   ▒ ▓███▀ ░░ ████▓▒░▒██▒   ░██▒▒██▒ ░  ░░██████▒░▒████▒ ▒██▒ ░ ░▒████▒ "
-	@echo " ░ ░▒ ▒  ░░ ▒░▒░▒░ ░ ▒░   ░  ░▒▓▒░ ░  ░░▓  ░ ▒░▓  ░▒▒   ▓▒█░ ▒ ░░   ░▓  ░ ▒░▒░▒░ ░ ▒░   ▒ ▒    ░ ░▒ ▒  ░░ ▒░▒░▒░ ░ ▒░   ░  ░▒▓▒░ ░  ░░ ▒░▓  ░░░ ▒░ ░ ▒ ░░   ░░ ▒░ ░ "
-	@echo "   ░  ▒     ░ ▒ ▒░ ░  ░      ░░▒ ░      ▒ ░░ ░ ▒  ░ ▒   ▒▒ ░   ░     ▒ ░  ░ ▒ ▒░ ░ ░░   ░ ▒░     ░  ▒     ░ ▒ ▒░ ░  ░      ░░▒ ░     ░ ░ ▒  ░ ░ ░  ░   ░     ░ ░  ░ "
-	@echo " ░        ░ ░ ░ ▒  ░      ░   ░░        ▒ ░  ░ ░    ░   ▒    ░       ▒ ░░ ░ ░ ▒     ░   ░ ░    ░        ░ ░ ░ ▒  ░      ░   ░░         ░ ░      ░    ░         ░    "
-	@echo " ░ ░          ░ ░         ░             ░      ░  ░     ░  ░         ░      ░ ░           ░    ░ ░          ░ ░         ░                ░  ░   ░  ░           ░  ░ "
-	@echo " ░                                                                                             ░                                                                    "
 
 $(LFT_DIR):
 	@echo "Cloning libft"
