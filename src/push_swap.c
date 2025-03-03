@@ -6,7 +6,7 @@
 /*   By: lfiorell <lfiorell@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 11:26:02 by lfiorell          #+#    #+#             */
-/*   Updated: 2025/03/03 15:47:25 by lfiorell         ###   ########.fr       */
+/*   Updated: 2025/03/03 15:51:13 by lfiorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,10 @@ int	main(int argc, char const *argv[], char const *envp[])
 		kill_thatguy(guy);
 		return (0);
 	}
-	if (guy->size > 3)
+	if (guy->size > 4)
 		bitshift(guy);
+	else if (guy->size == 4)
+		sort_four(guy);
 	else if (guy->size == 3)
 		sort_three(guy);
 	else if (guy->size == 2)

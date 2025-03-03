@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   smol.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfiorell <lfiorell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lfiorell <lfiorell@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:16:32 by lfiorell          #+#    #+#             */
-/*   Updated: 2025/02/05 16:45:07 by lfiorell         ###   ########.fr       */
+/*   Updated: 2025/03/03 15:51:01 by lfiorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void	sort_four(t_data *data)
 		min = i(data->a, 0);
 		while (i(data->a, 0) < new)
 			push_ops(data, &ra);
+		push_ops(data, &pa);
 		while (i(data->a, 0) != min)
 			push_ops(data, &rra);
 	}
