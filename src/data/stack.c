@@ -6,55 +6,14 @@
 /*   By: lfiorell <lfiorell@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 11:49:53 by lfiorell          #+#    #+#             */
-/*   Updated: 2025/03/03 15:29:38 by lfiorell         ###   ########.fr       */
+/*   Updated: 2025/03/03 15:38:51 by lfiorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "data.h"
 #include "job.h"
 
-static int	validate_argument(const char *str)
-{
-	int	j;
-
-	j = 0;
-	if (str[0] == '-')
-		j++;
-	if (str[j] == '\0')
-		return (0);
-	while (str[j])
-	{
-		if (!ft_isdigit(str[j]))
-			return (0);
-		j++;
-	}
-	return (1);
-}
-
-int	parse(int argc, const char *argv[], int *stack)
-{
-	int	i;
-	int	k;
-
-	i = 0;
-	if (!stack)
-		return (ERR_MALLOC);
-	while (i < argc)
-	{
-		if (!validate_argument(argv[i]))
-			return (ERR_ARG_TYPE);
-		stack[i] = ft_atoi(argv[i]);
-		k = 0;
-		while (k < i)
-		{
-			if (stack[k] == stack[i])
-				return (ERR_DUPL);
-			k++;
-		}
-		i++;
-	}
-	return (0);
-}
+int			parse(int argc, char *argv[], int *stack);
 
 static int	same_arg(const char *argv[], int **stack)
 {
@@ -87,7 +46,7 @@ int	choose_input(int argc, const char *argv[], char const *envp[], int **stack)
 		*stack = ft_calloc(argc, sizeof(int));
 		if (*stack == NULL)
 			return (ERR_MALLOC);
-		res = parse(argc, argv, *stack);
+		res = parse(argc, (char **)argv, *stack);
 		if (res < 0)
 			return (res);
 		return (argc);

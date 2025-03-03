@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfiorell <lfiorell@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lfiorell <lfiorell@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 11:24:23 by lfiorell          #+#    #+#             */
-/*   Updated: 2025/02/06 12:12:57 by lfiorell         ###   ########.fr       */
+/*   Updated: 2025/03/03 15:38:04 by lfiorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,6 @@ int			choose_input(int argc, const char *argv[], char const *envp[],
 int			kill_meeeeeeeeeeeeeeeee(char const *envp[], int **stack);
 int			*clone_iarr(int *arr, int len);
 int			idx_of(int *arr, int len, int val);
+long		ft_atol(const char *nptr);
 
 #endif
