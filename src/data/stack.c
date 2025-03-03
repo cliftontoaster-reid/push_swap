@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: creid <creid@student.42.fr>                +#+  +:+       +#+        */
+/*   By: lfiorell <lfiorell@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 11:49:53 by lfiorell          #+#    #+#             */
-/*   Updated: 2025/02/24 15:12:56 by creid            ###   ########.fr       */
+/*   Updated: 2025/03/03 15:29:38 by lfiorell         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ int	choose_input(int argc, const char *argv[], char const *envp[], int **stack)
 	{
 		if (ft_strchr(argv[0], ' '))
 			return (same_arg(argv, stack));
+		if (argc == 0)
+			return (ERR_ARG);
 		*stack = ft_calloc(argc, sizeof(int));
 		if (*stack == NULL)
 			return (ERR_MALLOC);
