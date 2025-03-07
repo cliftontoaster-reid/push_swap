@@ -5,6 +5,10 @@
             "label": "Build",
             "type": "shell",
             "command": "make",
+            "args": [
+                "-j4",
+                "all"
+            ],
             "group": {
                 "kind": "build",
                 "isDefault": true
@@ -23,6 +27,40 @@
                     "severity": 4,
                     "message": 5
                 }
+            }
+        },
+        {
+            "label": "Test",
+            "type": "shell",
+            "command": "make",
+            "args": [
+                "test"
+            ],
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "dependsOn": [
+                "Build"
+            ],
+            "problemMatcher": {
+                "owner": "cpp",
+                "fileLocation": [
+                    "relative",
+                    "${workspaceFolder}"
+                ],
+                "pattern": [
+                    {
+                        "regexp": "\\s*CUnit\\s+-\\s+Test:\\s+(.*?)\\s+-\\s+Test:\\s+(.*?)\\s+\\.\\.\\.\\s+FAILED",
+                        "message": 0
+                    },
+                    {
+                        "regexp": "\\s*\\d+\\. (.*?):(\\d+)\\s+-\\s+(.*)$",
+                        "file": 1,
+                        "line": 2,
+                        "message": 3
+                    }
+                ]
             }
         }
     ]
