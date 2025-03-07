@@ -1,36 +1,37 @@
 {
-  "version": "0.2.0",
-  "configurations": [
-    {
-      "name": "(gdb) Launch",
-      "type": "cppdbg",
-      "request": "launch",
-      "program": "${workspaceFolder}/push_swap",
-      "args": ["4 7 11 42 48 55 64 82 97 69"],
-      "stopAtEntry": false,
-      "cwd": "${fileDirname}",
-      "environment": [
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
         {
-          // export ASAN_OPTIONS=detect_leaks=0
-          "name": "ASAN_OPTIONS",
-          "value": "detect_leaks=0"
-        },
-        {
-          // LSAN_OPTIONS=verbosity=1:log_threads=1
-          "name": "LSAN_OPTIONS",
-          "value": "verbosity=1:log_threads=1"
+            "name": "(gdb) Launch",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/push_swap",
+            "args": [
+                "3",
+                "9",
+                "1",
+                "5",
+                "4",
+                "8",
+                "6",
+                "7",
+                "2"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ]
         }
-      ],
-      "externalConsole": false,
-      "MIMode": "gdb",
-      "setupCommands": [
-        {
-          "description": "Enable pretty-printing for gdb",
-          "text": "-enable-pretty-printing",
-          "ignoreFailures": true
-        }
-      ],
-      "preLaunchTask": "makefile"
-    }
-  ]
+    ]
 }
