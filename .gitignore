@@ -2,3 +2,5 @@
 /push_swap
 /tests/swapush
 /libft
+/checker_*
+/push_swap_tester
